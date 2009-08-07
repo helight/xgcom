@@ -32,7 +32,7 @@ GtkWidget* create_about_xcomtool (GtkWidget *main_window)
 	GtkWidget *dialog_action_area;
 	GtkWidget *close_about;
 
-	about_xcomtool = gtk_dialog_new_with_buttons("About Xcomtool", 
+	about_xcomtool = gtk_dialog_new_with_buttons("About XGCom", 
 	GTK_WINDOW(main_window), GTK_DIALOG_DESTROY_WITH_PARENT,NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (about_xcomtool), GDK_WINDOW_TYPE_HINT_DIALOG);
 	
@@ -54,12 +54,12 @@ GtkWidget* create_about_xcomtool (GtkWidget *main_window)
 	gtk_widget_show (image_photo);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), image_photo, TRUE, TRUE, 0);
 
-	label_note = gtk_label_new (_("<b>Xcomtool (0.01)</b>"));
+	label_note = gtk_label_new (_("<b>XGCom (0.01)</b>"));
 	gtk_widget_show (label_note);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), label_note, FALSE, FALSE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (label_note), TRUE);
 
-	label_author = gtk_label_new (_("Xcomtool is a open source software.\nCopyright \302\251 Helight.xu@gmail.com"));
+	label_author = gtk_label_new (_("XGCom is a open source software.\nCopyright \302\251 Helight.xu@gmail.com"));
 	gtk_widget_show (label_author);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), label_author, FALSE, FALSE, 0);
 
