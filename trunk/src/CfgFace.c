@@ -303,7 +303,8 @@ on_ok_button_clicked (GtkButton *button, gpointer user_data)
 	xcomdata->comcfg.flow = row;
 	
 	show_uart_param(xcomdata);
-	config_uart(xcomdata);
+	if(xcomdata->com_stat)
+		config_uart(xcomdata);
 	gtk_widget_destroy(GTK_WIDGET(cfg_dialog));
 	
 	return;

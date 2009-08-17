@@ -53,7 +53,7 @@ GtkWidget *rcv_num = NULL;
 GtkWidget *send_num = NULL;
 GIOChannel *gio = NULL;
 
-void check_port(void);
+void check_port(struct xcomdata *xcomdata);
 int open_uart(struct xcomdata *xcomdata);
 int write_uart(char *buf, int len);
 int read_uart(void);
@@ -99,11 +99,12 @@ on_load_conf_clicked (GtkButton *button, gpointer user_data)
 void
 on_open_uart_clicked (GtkButton *button, gpointer user_data)
 {
+	int ret = 0;
 	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
 	debug_p("left_vbox baud: %d \n", xcomdata->comcfg.baud);
 	
 	if (uart_stat) {		
-		check_port();
+		check_port(xcomdata);
 		gtk_label_set_text(GTK_LABEL (xcomdata->gcom_stat), "close");
 		gtk_button_set_label(GTK_BUTTON (xcomdata->button_open_uart), "打开串口");
 		gtk_widget_set_sensitive(GTK_WIDGET(xcomdata->gbutton_send_data), FALSE);
@@ -111,7 +112,9 @@ on_open_uart_clicked (GtkButton *button, gpointer user_data)
 		gtk_widget_set_sensitive(GTK_WIDGET(xcomdata->gkeep_send), FALSE);
 		debug_p("hide uart\n");
 	} else {
-		config_uart(xcomdata);				
+		ret = config_uart(xcomdata);	
+		if(ret < 0)
+			return;
 		gtk_label_set_text(GTK_LABEL (xcomdata->gcom_stat), "open");
 		gtk_button_set_label(GTK_BUTTON (xcomdata->button_open_uart), "关闭串口");
 		gtk_widget_set_sensitive(GTK_WIDGET(xcomdata->gbutton_send_data), TRUE);
@@ -212,6 +215,8 @@ on_send_file_clicked (GtkButton *button, gpointer user_data)
 		}while(1);//end while
 		
 		fclose(fd);
+	} else {
+		  create_xgcom_msg(xcomdata->gmain, "<b>Cann't Open the file!!!</b>");
 	}
 }
 
@@ -317,13 +322,15 @@ on_cover_save_toggled (GtkToggleButton *togglebutton, gpointer user_data)
 
 int open_uart(struct xcomdata *xcomdata)
 {
-	//gio =  g_io_channel_unix_new (ufd);
-	//ufd = open(xcomdata->comcfg.port, O_RDWR | O_NOCTTY | O_NDELAY / O_NONBLOCK);
 	ufd = open(xcomdata->comcfg.port, O_RDWR | O_NOCTTY | O_NDELAY );
-	//ufd = open(xcomdata->comcfg.port, O_RDWR );
+
         if ( ufd  < 0 ) {
                 perror("Open com error:\n");
-                exit(-1);
+                char buff[512];
+                snprintf(buff, 512, "<b>Open com error!</b>\n\n"
+                "<b>Please: chmod 666 %s</b>", xcomdata->comcfg.port);
+                create_xgcom_msg(xcomdata->gmain, buff);
+                return -1;
         }
 	printf("Open %s \n", xcomdata->comcfg.port);
 	rcv_num = xcomdata->grcv_num_show;
@@ -332,12 +339,13 @@ int open_uart(struct xcomdata *xcomdata)
 	return 0;	
 }
 
-void check_port(void)
+void check_port(struct xcomdata *xcomdata)
 {
 	if(ufd != -1){
 		if(uart_stat ){
 			gtk_input_remove(callback_handler);
 			uart_stat = 0;
+			xcomdata->com_stat = 0;
 		}
 		tcsetattr(ufd, TCSANOW, &termios_save);
 		tcflush(ufd, TCOFLUSH);  
@@ -349,12 +357,14 @@ void check_port(void)
 
 int config_uart(struct xcomdata *xcomdata)
 {
-	int   status; 
+	int   status, ret = 0; 
 	struct termios termios_p; 
 	struct comcfg *config = &(xcomdata->comcfg);
 	
-	check_port();
-	open_uart(xcomdata);
+	check_port(xcomdata);
+	ret = open_uart(xcomdata);
+	if(ret < 0 )
+		return -1;
 	switch (config->baud) {
 		case 300:
 			termios_p.c_cflag =  B300;
@@ -466,6 +476,7 @@ int config_uart(struct xcomdata *xcomdata)
 	
 	callback_handler = gtk_input_add_full(ufd, GDK_INPUT_READ, (GdkInputFunction)read_uart, NULL, NULL, NULL);
 	uart_stat = 1;
+	xcomdata->com_stat = 1;
 	return 0;  
 }
 
@@ -491,10 +502,10 @@ int write_uart(char *buf, int len)
 int read_uart(void)
 {	
 	int ret = 0, len = 0;
-	unsigned char frame[32] = {0};	
+	unsigned char frame[1024] = {0};	
 	char num[32] = {0};
 
-	ret = read(ufd, frame, 32);
+	ret = read(ufd, frame, 1024);
 	if (ret < 0) {
 		perror("read error:\n");
 		return -1;
@@ -592,3 +603,75 @@ void hex_send(char *text)
 		ptr = temp;
 	}
 }
+static inline int Send_crlf(void)
+{
+	char crlf_seq[2] = {'\r', '\n'};
+
+	if(write_uart(crlf_seq, 2) != 2)
+		return (-1);
+	else
+		return 1;
+}
+
+int Send_chars(char *string, int length)
+{
+  char *buffer, *start_buffer;
+  int i, size_written, buf_length;
+  int bytes_written = 0;
+
+  /* Normally it never happens, but it is better not to segfault ;) */
+  if(length == 0)
+    return 0;
+
+  buffer=string;
+
+	if (length == 1) {
+		if(*string == '\n' ) { //|| *string == '\r'){
+			bytes_written = Send_crlf();
+		} else	{
+			bytes_written = write_uart(string, length);
+		}
+	} else {
+		start_buffer = buffer;
+		buf_length = 1;
+		for(i = 0; i < length; i++){
+			if(*buffer == '\n' && *(buffer - 1) != '\r'){
+				size_written = write_uart(start_buffer, buf_length - 1);
+
+				if(size_written == -1)
+					return bytes_written;
+
+				size_written = Send_crlf();
+				if(size_written == -1)
+					return bytes_written;
+
+				start_buffer = buffer + 1;
+				buf_length = 0;
+			} else if(*(buffer - 1) == '\r' && *buffer != '\n'){
+				if(buf_length > 2)
+					size_written = write_uart(start_buffer, buf_length - 2);
+				else
+					size_written =0;
+
+				if(size_written == -1)
+					return bytes_written;
+
+				size_written = Send_crlf();
+				if(size_written == -1)
+					return bytes_written;
+
+				start_buffer = buffer;
+				buf_length = 1;
+			}
+			buffer++;
+			buf_length++;
+		}
+		if(buf_length>1)
+			bytes_written += write_uart(start_buffer, buf_length-1);
+		if(start_buffer[buf_length-2] == '\r')
+			bytes_written += write_uart("\n", 1);
+	}
+
+  return 0;
+}
+

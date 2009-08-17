@@ -74,7 +74,9 @@ struct comcfg{
  * The struct for the whole configuration
  */
 struct xcomdata{
+	int fd;
 	int ishex_send;			//send by hex(1) or not(0)
+	int com_stat;				//the stat of the com
 	int rcv_num;				//how many byte has received
 	int send_num;				//how many byte has send
 	int save_vte;				//save the receive data
@@ -140,6 +142,7 @@ GdkPixbuf*  create_pixbuf (const gchar *filename);
 void glade_set_atk_action_description (AtkAction *action,
 					const gchar *action_name,
 					const gchar *description);
-
+					
+void create_xgcom_msg(GtkWidget *mainwindow, gchar *help_msg);
 
 #endif //Support_H_

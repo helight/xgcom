@@ -107,3 +107,20 @@ create_pixbuf (const gchar *filename)
 	return pixbuf;
 }
 
+void create_xgcom_msg(GtkWidget *mainwindow, gchar * help_msg)
+{
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new(GTK_WINDOW(mainwindow),
+                                  GTK_DIALOG_DESTROY_WITH_PARENT,
+                                  GTK_MESSAGE_OTHER,
+                                  GTK_BUTTONS_CLOSE,
+                                  NULL);
+	//gtk_widget_set_size_request (dialog, 330, -1);
+	gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG(dialog), help_msg);
+	gtk_widget_show(dialog);
+ 	g_signal_connect_swapped(dialog, "response",
+                           G_CALLBACK(gtk_widget_destroy),
+                           dialog);  
+
+}

@@ -18,10 +18,10 @@
 
 #include <gtk/gtk.h>
 #include "support.h"
-GtkWidget* create_Xcomtool (struct xcomdata *xcomdata);
+GtkWidget* create_Xgcom (struct xcomdata *xcomdata);
 void open_config_uart(struct xcomdata *xcomdata);
 void close_uart();
 
 gboolean
-on_Xcomtool_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data);
+on_Xgcom_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data);
 #endif //MainWindow_H_

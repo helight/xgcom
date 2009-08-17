@@ -12,4 +12,12 @@
  *
  * Program definitions:
  */
-GtkWidget* create_configuration_dialog (gpointer user_data);
+#ifndef CFG_H_
+#define CFG_H_
+
+#include <gtk/gtk.h>
+#include "support.h"
+
+GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata);
+
+#endif //CFG_H_

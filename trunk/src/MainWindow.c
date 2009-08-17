@@ -33,10 +33,10 @@
 #include "RightVboxFace.h"
 #include "LeftVboxFace.h"
 
-GtkWidget* create_Xcomtool (struct xcomdata *xcomdata)
+GtkWidget* create_Xgcom (struct xcomdata *xcomdata)
 {
 	GtkWidget *main_window;
-	GdkPixbuf *Xcomtool_icon_pixbuf;
+	GdkPixbuf *Xgcom_icon_pixbuf;
 	GtkWidget *main_vbox;
 /*-------------------------main_menubar---------------------*/
 	GtkWidget *main_menubar;
@@ -60,10 +60,10 @@ GtkWidget* create_Xcomtool (struct xcomdata *xcomdata)
 	gtk_window_set_default_size (GTK_WINDOW (main_window), 500, 600);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (main_window), TRUE);
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
-	Xcomtool_icon_pixbuf = create_pixbuf ("zhwen.png");
-	if (Xcomtool_icon_pixbuf){
-		gtk_window_set_icon (GTK_WINDOW (main_window), Xcomtool_icon_pixbuf);
-		gdk_pixbuf_unref (Xcomtool_icon_pixbuf);
+	Xgcom_icon_pixbuf = create_pixbuf ("zhwen.png");
+	if (Xgcom_icon_pixbuf){
+		gtk_window_set_icon (GTK_WINDOW (main_window), Xgcom_icon_pixbuf);
+		gdk_pixbuf_unref (Xgcom_icon_pixbuf);
 	}
 
 	main_vbox = gtk_vbox_new (FALSE, 0);
@@ -88,7 +88,7 @@ GtkWidget* create_Xcomtool (struct xcomdata *xcomdata)
 	foot_hbox = create_foot(main_window, main_vbox, xcomdata);
 
 	g_signal_connect ((gpointer) main_window, "delete_event",
-		G_CALLBACK (on_Xcomtool_delete_event), NULL);
+		G_CALLBACK (on_Xgcom_delete_event), NULL);
 
 	gtk_widget_grab_focus (main_window);
 	gtk_widget_grab_default (main_window);
@@ -101,7 +101,7 @@ GtkWidget* create_Xcomtool (struct xcomdata *xcomdata)
 }
 
 gboolean
-on_Xcomtool_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+on_Xgcom_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
 	printf("bey world;\n");
 	close_uart();

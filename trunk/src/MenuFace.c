@@ -19,92 +19,92 @@ GtkWidget* create_menu (GtkWidget *main_windown, GtkWidget *main_vbox,
 			GtkAccelGroup *accel_group, gpointer data)
 {
 	GtkWidget *main_menubar;
+
 	GtkWidget *menuitem_file;
 	GtkWidget *menu_file;
-	GtkWidget *save_conf_file;
-	GtkWidget *save_as_conf;
-	GtkWidget *separatormenuitem_file;
 	GtkWidget *quit_file;
+
 	GtkWidget *menuitem_edit;
 	GtkWidget *menu_edit;
 	GtkWidget *config;
-	GtkWidget *menuitem_view;
-	GtkWidget *menu_view;
+
+	GtkWidget *menuitem_tool;
+	GtkWidget *menu_tool;
+	GtkWidget *ascii_talbe;
+	
 	GtkWidget *menuitem_help;
 	GtkWidget *menu_help;
-	GtkWidget *about_xcomtool;
+	GtkWidget *help_xgcom;
+	GtkWidget *about_xgcom;
+	
+	struct xcomdata *xcomdata = (struct xcomdata *)data;
 	
 	main_menubar = gtk_menu_bar_new ();
 	gtk_widget_show (main_menubar);
 	gtk_box_pack_start (GTK_BOX (main_vbox), main_menubar, FALSE, FALSE, 0);
 
-	menuitem_file = gtk_menu_item_new_with_mnemonic (_("\137File"));
+	menuitem_file = gtk_menu_item_new_with_mnemonic (_("_File"));
 	gtk_widget_show (menuitem_file);
 	gtk_container_add (GTK_CONTAINER (main_menubar), menuitem_file);
 
 	menu_file = gtk_menu_new ();
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_file), menu_file);
 
-	save_conf_file = gtk_image_menu_item_new_from_stock ("gtk-save", accel_group);
-	gtk_widget_show (save_conf_file);
-	gtk_container_add (GTK_CONTAINER (menu_file), save_conf_file);
-
-	save_as_conf = gtk_image_menu_item_new_from_stock ("gtk-save-as", accel_group);
-	gtk_widget_show (save_as_conf);
-	gtk_container_add (GTK_CONTAINER (menu_file), save_as_conf);
-
-	separatormenuitem_file = gtk_separator_menu_item_new ();
-	gtk_widget_show (separatormenuitem_file);
-	gtk_container_add (GTK_CONTAINER (menu_file), separatormenuitem_file);
-	gtk_widget_set_sensitive (separatormenuitem_file, FALSE);
-
 	quit_file = gtk_image_menu_item_new_from_stock ("gtk-quit", accel_group);
 	gtk_widget_show (quit_file);
 	gtk_container_add (GTK_CONTAINER (menu_file), quit_file);
 
-	menuitem_edit = gtk_menu_item_new_with_mnemonic (_("\137Edit"));
+	menuitem_edit = gtk_menu_item_new_with_mnemonic (_("_Edit"));
 	gtk_widget_show (menuitem_edit);
 	gtk_container_add (GTK_CONTAINER (main_menubar), menuitem_edit);
 
 	menu_edit = gtk_menu_new ();
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_edit), menu_edit);
 
-	config = gtk_image_menu_item_new_from_stock ("gtk-cut", accel_group);
+	config = gtk_menu_item_new_with_mnemonic (_("_Configure"));
 	gtk_widget_show (config);
 	gtk_container_add (GTK_CONTAINER (menu_edit), config);
 
-	menuitem_view = gtk_menu_item_new_with_mnemonic (_("\137View"));
-	gtk_widget_show (menuitem_view);
-	gtk_container_add (GTK_CONTAINER (main_menubar), menuitem_view);
+	menuitem_tool = gtk_menu_item_new_with_mnemonic (_("_Tools"));
+	gtk_widget_show (menuitem_tool);
+	gtk_container_add (GTK_CONTAINER (main_menubar), menuitem_tool);
 
-	menu_view = gtk_menu_new ();
-	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_view), menu_view);
+	menu_tool = gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_tool), menu_tool);
+	
+	ascii_talbe = gtk_menu_item_new_with_mnemonic (_("_ASCII"));
+	gtk_widget_show (ascii_talbe);
+	gtk_container_add (GTK_CONTAINER (menu_tool), ascii_talbe);
 
-	menuitem_help = gtk_menu_item_new_with_mnemonic (_("\137Help"));
+	menuitem_help = gtk_menu_item_new_with_mnemonic (_("_Help"));
 	gtk_widget_show (menuitem_help);
 	gtk_container_add (GTK_CONTAINER (main_menubar), menuitem_help);
 
 	menu_help = gtk_menu_new ();
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_help), menu_help);
 
-	about_xcomtool = gtk_menu_item_new_with_mnemonic (_("\137About"));
-	gtk_widget_show (about_xcomtool);
-	gtk_container_add (GTK_CONTAINER (menu_help), about_xcomtool);
+	help_xgcom = gtk_menu_item_new_with_mnemonic (_("_Help"));
+	gtk_widget_show (help_xgcom);
+	gtk_container_add (GTK_CONTAINER (menu_help), help_xgcom);
 	
-	g_signal_connect ((gpointer) save_conf_file, "activate",
-		G_CALLBACK (on_save_conf_activate),
-		NULL);
-	g_signal_connect ((gpointer) save_as_conf, "activate",
-		G_CALLBACK (on_save_as_conf_activate),
-		NULL);
+	about_xgcom = gtk_menu_item_new_with_mnemonic (_("_About"));
+	gtk_widget_show (about_xgcom);
+	gtk_container_add (GTK_CONTAINER (menu_help), about_xgcom);
+	
 	g_signal_connect ((gpointer) quit_file, "activate",
 		G_CALLBACK (on_quit_file_activate),
 		NULL);
 	g_signal_connect ((gpointer) config, "activate",
 		G_CALLBACK (on_config_activate),
-		NULL);
-	g_signal_connect ((gpointer) about_xcomtool, "activate",
-		G_CALLBACK (on_about_xcomtool_activate),
+		(gpointer)xcomdata);
+	g_signal_connect ((gpointer) ascii_talbe, "activate",
+		G_CALLBACK (on_ascii_talbe_activate),
+		(gpointer)main_windown);
+	g_signal_connect ((gpointer) help_xgcom, "activate",
+		G_CALLBACK (on_help_xgcom_activate),
+		(gpointer)main_windown);	
+	g_signal_connect ((gpointer) about_xgcom, "activate",
+		G_CALLBACK (on_about_xgcom_activate),
 		(gpointer)main_windown);
 	
 	return main_menubar;

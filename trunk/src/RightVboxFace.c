@@ -20,6 +20,10 @@ static gboolean show_index = FALSE;
 static int bytes_per_line = 80;
 static int total_bytes = 0;
 GtkWidget *rcv_text;
+struct xcomdata *xcomdata;
+
+static void Got_Input(VteTerminal *, gchar *, guint, gpointer);
+
 
 GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox, 
 			GtkAccelGroup *accel_group, gpointer data)
@@ -35,7 +39,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	GtkWidget *send_text;
 	GtkWidget *send_label;
 	
-	struct xcomdata *xcomdata = (struct xcomdata *)data;
+	xcomdata = (struct xcomdata *)data;
 	
 	right_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (right_vbox);
@@ -45,6 +49,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	rcv_frame = gtk_frame_new (NULL);
 	gtk_widget_show (rcv_frame);
 	gtk_box_pack_start (GTK_BOX (right_vbox), rcv_frame, TRUE, TRUE, 0);
+	gtk_widget_set_size_request (rcv_frame, -1, 380);
 
 	alignment2 = gtk_alignment_new (0.5, 0.5, 1, 1);
 	gtk_widget_show (alignment2);
@@ -91,6 +96,8 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_frame_set_label_widget (GTK_FRAME (send_frame), send_label);
 	gtk_label_set_use_markup (GTK_LABEL (send_label), TRUE);
 	
+	g_signal_connect_after(GTK_OBJECT(rcv_text), "commit", G_CALLBACK(Got_Input), NULL);
+	
 	xcomdata->grcv_text = rcv_text;
 	xcomdata->gsend_text = send_text;
 
@@ -113,59 +120,6 @@ void put_hexadecimal(gchar *string, guint size)
 		sprintf(data_byte, "%02X ", (guchar)string[i]);
 		i++;
 		vte_terminal_feed(VTE_TERMINAL(rcv_text), data_byte, 3);
-/*  
-		while(gtk_events_pending()) gtk_main_iteration();
-		vte_terminal_get_cursor_position(VTE_TERMINAL(rcv_text), &column, &row);
-
-		if(show_index) {
-			if(column == 0){//First byte on line 			
-				sprintf(data, "%6d: ", size);
-				vte_terminal_feed(VTE_TERMINAL(rcv_text), data, strlen(data));
-				bytes = 0;
-			}
-		} else {
-			if(column == 0)
-				bytes = 0;
-		}
-
-		// Print hexadecimal characters 
-		data[0] = 0;
-
-		while(bytes < bytes_per_line && i < size) {
-			gint avance=0;
-			gchar ascii[1];
-
-			sprintf(data_byte, "%02X ", (guchar)string[i]);
-			vte_terminal_feed(VTE_TERMINAL(rcv_text), data_byte, 3);
-
-			avance = (bytes_per_line - bytes) * 3 + bytes + 2;
-
-			// Move forward 
-			sprintf(data_byte, "%c[%dC", 27, avance);
-			vte_terminal_feed(VTE_TERMINAL(rcv_text), data_byte, strlen(data_byte));
-
-			// Print ascii characters 	  
-			ascii[0] = (string[i] > 0x1F) ? string[i] : '.';
-			vte_terminal_feed(VTE_TERMINAL(rcv_text), ascii, 1);
-
-			// Move backward 	      
-			sprintf(data_byte, "%c[%dD", 27, avance + 1);
-			vte_terminal_feed(VTE_TERMINAL(rcv_text), data_byte, strlen(data_byte));
-
-			if(bytes == bytes_per_line / 2 - 1)
-				vte_terminal_feed(VTE_TERMINAL(rcv_text), "- ", strlen("- "));
-
-			bytes++;
-			i++;
-
-			// End of line ? 
-			if(bytes == bytes_per_line){
-				vte_terminal_feed(VTE_TERMINAL(rcv_text), "\r\n", 2);
-				total_bytes += bytes;
-			}
-
-		}     
-*/
 	}
 	
 }
@@ -180,7 +134,7 @@ void put_text(gchar *string, guint size)
 	in_buffer=buffer_tmp->str;
 	in_buffer += size;
 	
-	for (pos=size; pos>0; pos--) {
+	for (pos = size; pos > 0; pos--) {
 		in_buffer--;
 		if(*in_buffer=='\r' && *(in_buffer+1) != '\n'){
 			g_string_insert_c(buffer_tmp, pos, '\n');
@@ -199,3 +153,23 @@ void clear_display(void)
 	if(rcv_text)
 		vte_terminal_reset(VTE_TERMINAL(rcv_text), TRUE, TRUE);
 }
+
+gint send_serial(gchar *string, gint len)
+{
+	gint bytes_written;
+
+	bytes_written = Send_chars(string, len);
+	if(bytes_written > 0){
+		//if(echo_on)
+		//put_text(string, bytes_written);
+	}
+
+	return bytes_written;
+}
+
+static void Got_Input(VteTerminal *widget, gchar *text, guint length, gpointer ptr)
+{
+	if(xcomdata->com_stat)
+		send_serial(text, length);
+}
+
