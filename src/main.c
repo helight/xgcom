@@ -57,7 +57,7 @@ int main (int argc, char *argv[])
 	gdk_threads_init();
 	init_xcomdata(&xcomdata);
 	
-	main_windown = create_Xcomtool (&xcomdata);
+	main_windown = create_Xgcom (&xcomdata);
 	
 	show_uart_param(&xcomdata);
 	
@@ -88,7 +88,9 @@ void callback_icon(GtkStatusIcon *status_icon,gpointer data)
 
 void init_xcomdata(struct xcomdata *xcomdata)
 {
+	xcomdata->fd = -1;
 	xcomdata->ishex_send = 0;
+	xcomdata->com_stat = 0;
 	xcomdata->rcv_num = 0;
 	xcomdata->send_num = 0;
 	xcomdata->save_vte = 0;

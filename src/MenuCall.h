@@ -19,18 +19,18 @@
 #include "support.h"
 
 void
-on_save_conf_activate (GtkMenuItem *menuitem, gpointer user_data);
-
-void
-on_save_as_conf_activate (GtkMenuItem *menuitem, gpointer user_data);
-
-void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data);
 
 void
 on_config_activate (GtkMenuItem *menuitem, gpointer user_data);
 
 void
-on_about_xcomtool_activate (GtkMenuItem *menuitem, gpointer user_data);
+on_ascii_talbe_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_about_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data);
 
 #endif //MenuCall_H_

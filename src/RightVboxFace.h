@@ -24,5 +24,6 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 void put_text(gchar *string, guint size);
 void put_hexadecimal(gchar *string, guint size);
 void clear_display(void);
-void save_vte_data();			
+void save_vte_data();		
+int Send_chars(char *string, int length);	
 #endif //#ifndef RightVboxFace_H_
