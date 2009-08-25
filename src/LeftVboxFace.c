@@ -345,7 +345,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_radio_button_set_group (GTK_RADIO_BUTTON (cover_save), add_save_group);
 	add_save_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (cover_save));
 
-	save_label = gtk_label_new (_("\344\277\235\345\255\230\351\200\211\351\241\271"));
+	save_label = gtk_label_new (_("捕获选项"));
 	gtk_widget_show (save_label);
 	gtk_frame_set_label_widget (GTK_FRAME (frame_save), save_label);
 	gtk_label_set_use_markup (GTK_LABEL (save_label), TRUE);

@@ -60,7 +60,7 @@ static GtkWidget *com_sbits;
 static GtkWidget *com_parity;
 static GtkWidget *com_flow;
 
-void on_cancel_button_clicked (GtkButton *button, gpointer user_data);
+void on_save_button_clicked (GtkButton *button, gpointer user_data);
 void on_ok_button_clicked (GtkButton *button, gpointer user_data);
 
 GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata)
@@ -83,10 +83,11 @@ GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata)
 	GtkWidget *setup_label;
 	GtkWidget *dialog_action_area1;
 	GtkWidget *cancel_button;
+	GtkWidget *save_button;
 	GtkWidget *ok_button;
 
 	cfg_dialog = gtk_dialog_new ();
-	gtk_widget_set_size_request (cfg_dialog, 240, 240);
+	gtk_widget_set_size_request (cfg_dialog, 240, 260);
 	gtk_window_set_title (GTK_WINDOW (cfg_dialog), _("configuration"));
 	gtk_window_set_position (GTK_WINDOW (cfg_dialog), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (cfg_dialog), TRUE);
@@ -173,7 +174,7 @@ GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata)
 			gtk_combo_box_append_text (GTK_COMBO_BOX (com_port),devices_list[i]);
 	}
 	gtk_combo_box_set_active(GTK_COMBO_BOX(com_port), 0);
-	gtk_entry_set_editable(GTK_ENTRY(GTK_BIN(com_port)->child), FALSE);	
+	//gtk_entry_set_editable(GTK_ENTRY(GTK_BIN(com_port)->child), FALSE);	
 
 	com_rate = gtk_combo_box_entry_new_text ();
 	gtk_widget_show (com_rate);
@@ -252,18 +253,17 @@ GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata)
 	gtk_widget_show (dialog_action_area1);
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
 
-	cancel_button = gtk_button_new_from_stock ("gtk\55cancel");
-	gtk_widget_show (cancel_button);
-	gtk_dialog_add_action_widget (GTK_DIALOG (cfg_dialog), cancel_button, GTK_RESPONSE_CANCEL);
-	GTK_WIDGET_SET_FLAGS (cancel_button, GTK_CAN_DEFAULT);
-
-	ok_button = gtk_button_new_from_stock ("gtk\55ok");
+	save_button = gtk_button_new_with_mnemonic (_("Save Def")); 
+	gtk_widget_show (save_button);
+	gtk_dialog_add_action_widget (GTK_DIALOG (cfg_dialog), save_button, GTK_RESPONSE_OK);
+	
+	ok_button = gtk_button_new_with_mnemonic (_("Save Tmp"));
 	gtk_widget_show (ok_button);
 	gtk_dialog_add_action_widget (GTK_DIALOG (cfg_dialog), ok_button, GTK_RESPONSE_OK);
 	GTK_WIDGET_SET_FLAGS (ok_button, GTK_CAN_DEFAULT);
 
-	g_signal_connect ((gpointer) cancel_button, "clicked",
-		G_CALLBACK (on_cancel_button_clicked),
+	g_signal_connect ((gpointer) save_button, "clicked",
+		G_CALLBACK (on_save_button_clicked),
 		(gpointer)xcomdata);
 	g_signal_connect ((gpointer) ok_button, "clicked",
 		G_CALLBACK (on_ok_button_clicked),
@@ -272,20 +272,8 @@ GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata)
 	return cfg_dialog;
 }
 
-void
-on_cancel_button_clicked (GtkButton *button, gpointer user_data)
+void get_data_from_window(struct xcomdata *xcomdata)
 {
-	//GtkWidget *window_about = (GtkWidget *)user_data;
-	gtk_widget_destroy(GTK_WIDGET(cfg_dialog));
-	
-	return;
-}
-
-
-void
-on_ok_button_clicked (GtkButton *button, gpointer user_data)
-{
-	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
 	gchar *fp = NULL;
 	int row = -1;
 	
@@ -301,7 +289,31 @@ on_ok_button_clicked (GtkButton *button, gpointer user_data)
 	xcomdata->comcfg.parity = row;
 	row = gtk_combo_box_get_active(GTK_COMBO_BOX(com_flow));
 	xcomdata->comcfg.flow = row;
+}
+void
+on_save_button_clicked (GtkButton *button, gpointer user_data)
+{	
+	char path[256] = {0};
+	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
+	sprintf(path, "%s/.xgcom.conf", getenv("HOME"));
+	printf("path: %s \n", path);
+	get_data_from_window(xcomdata);
+	do_save_cfg_file(&(xcomdata->comcfg), path);
+	show_uart_param(xcomdata);
+	if(xcomdata->com_stat)
+		config_uart(xcomdata);
+	gtk_widget_destroy(GTK_WIDGET(cfg_dialog));
 	
+	return;
+}
+
+
+void
+on_ok_button_clicked (GtkButton *button, gpointer user_data)
+{
+	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
+
+	get_data_from_window(xcomdata);
 	show_uart_param(xcomdata);
 	if(xcomdata->com_stat)
 		config_uart(xcomdata);

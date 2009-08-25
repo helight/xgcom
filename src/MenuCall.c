@@ -16,6 +16,7 @@
 #include "Cfg.h"
 #include "MenuCall.h"
 #include "LeftVboxFace.h"
+#include "RightVboxFace.h"
 
 void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data)
@@ -23,6 +24,23 @@ on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data)
 	printf("bey world;\n");
 	close_uart();
 	gtk_main_quit();
+}
+
+void
+on_local_echo_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
+	
+	debug_p("local echo\n");
+	if(xcomdata->local_echo){
+		xcomdata->local_echo = 0;
+		clean_local_echo();
+		debug_p("clean local echo\n");
+	} else {
+		xcomdata->local_echo = 1;
+		set_local_echo();
+		debug_p("set local echo\n");
+	}
 }
 
 void
@@ -60,8 +78,9 @@ on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data)
 		"8.串口HEX发送(以16进制的方式发送输入字符)\n"
 		"9.连续定时间间隔发送数据,发送间隔时间可以自己设置\n"
 		"10.面板托盘显示(可以隐藏或显示)\n"
-		"11.终端控制功能(像minicom那样可以直接在终端输入进行相应)\n"
-		"12.本地回显.");
+		"11.终端控制功能(像minicom那样可以直接在终端输入进行响应)\n"
+		"12.可配置默认启动参数.配置后以后启动则以默认启动参数打开串口\n"
+		"13.本地回显.");
 
 	create_xgcom_msg ((GtkWidget *)user_data, help_msg);
 
