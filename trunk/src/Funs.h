@@ -18,7 +18,9 @@
 #include <gtk/gtk.h>
 #include "support.h"
 
+void do_save_cfg_file(struct comcfg *comcfg, char *path);
 void save_cfg_file(struct xcomdata *xcomdata);
+int do_read_config(struct xcomdata *xcomdata, char *path);
 int read_config(struct xcomdata *xcomdata);
 void show_uart_param(struct xcomdata *xcomdata);
 void message_box_for_notice(GtkWidget *window,gchar *message);

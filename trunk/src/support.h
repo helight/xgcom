@@ -75,6 +75,7 @@ struct comcfg{
  */
 struct xcomdata{
 	int fd;
+	int local_echo;			//local echo
 	int ishex_send;			//send by hex(1) or not(0)
 	int com_stat;				//the stat of the com
 	int rcv_num;				//how many byte has received

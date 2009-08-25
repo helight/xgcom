@@ -20,6 +20,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #include "MainWindow.h"
 #include "support.h"
@@ -29,6 +30,7 @@ static int sta = 0;
 
 void callback_icon(GtkStatusIcon *status_icon,gpointer data);
 void init_xcomdata(struct xcomdata *xcomdata);
+void init_from_config_file(struct xcomdata *xcomdata);
 void show_uart_param(struct xcomdata *xcomdata);
 
 int main (int argc, char *argv[])
@@ -58,7 +60,7 @@ int main (int argc, char *argv[])
 	init_xcomdata(&xcomdata);
 	
 	main_windown = create_Xgcom (&xcomdata);
-	
+	init_from_config_file(&xcomdata);
 	show_uart_param(&xcomdata);
 	
 	panel_icon_pixbuf = create_pixbuf ("zhwen.png");
@@ -89,6 +91,7 @@ void callback_icon(GtkStatusIcon *status_icon,gpointer data)
 void init_xcomdata(struct xcomdata *xcomdata)
 {
 	xcomdata->fd = -1;
+	xcomdata->local_echo = 0;
 	xcomdata->ishex_send = 0;
 	xcomdata->com_stat = 0;
 	xcomdata->rcv_num = 0;
@@ -129,4 +132,14 @@ void init_xcomdata(struct xcomdata *xcomdata)
 	xcomdata->ginterval = NULL;
 }
 
-
+void init_from_config_file(struct xcomdata *xcomdata)
+{
+	struct stat my_stat;
+	char path[256] = {0};
+	
+	sprintf(path, "%s/.xgcom.conf", getenv("HOME"));
+	printf("path: %s \n", path);
+	if(stat(path, &my_stat) == 0)
+		do_read_config(xcomdata, path);
+	return;
+}

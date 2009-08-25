@@ -30,13 +30,13 @@
 static int read_line(int fd, char *bufv);
 static int do_setconfig(struct xcomdata *xcomdata, char *bufv);
 
-void save_cfg_file(struct xcomdata *xcomdata)
+
+void do_save_cfg_file(struct comcfg *comcfg, char *path)
 {
 	FILE *fd;
-	struct comcfg *comcfg = &(xcomdata->comcfg);
 	
-	debug_p("path:%s\n", xcomdata->cfg_file);
-	fd = fopen(xcomdata->cfg_file, "w");
+	debug_p("path:%s\n", path);
+	fd = fopen(path, "w+");
 	if (fd == NULL)
 		perror("open file");
 	fprintf(fd, "port %s\n", comcfg->port);
@@ -47,13 +47,20 @@ void save_cfg_file(struct xcomdata *xcomdata)
 	fprintf(fd, "flow %d\n", comcfg->flow);
 	fclose(fd);
 }
+void save_cfg_file(struct xcomdata *xcomdata)
+{
+	struct comcfg *comcfg = &(xcomdata->comcfg);
+	
+	debug_p("path:%s\n", xcomdata->cfg_file);
+	do_save_cfg_file(comcfg, xcomdata->cfg_file);
+}
 
-int read_config(struct xcomdata *xcomdata)
+int do_read_config(struct xcomdata *xcomdata, char *path)
 {
 	int fd = 0;
 	int ret = 0;
 	char bufv[256];
-	fd = open(xcomdata->cfg_file, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if(fd < 0)
 		return -1;
 	ret = read_line(fd, bufv);
@@ -63,6 +70,11 @@ int read_config(struct xcomdata *xcomdata)
 		}
 		ret =  read_line(fd, bufv);
 	}
+	return 0;
+}
+int read_config(struct xcomdata *xcomdata)
+{
+	do_read_config(xcomdata, xcomdata->cfg_file);
 	return 0;
 }
 

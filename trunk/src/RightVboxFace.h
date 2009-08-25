@@ -26,4 +26,6 @@ void put_hexadecimal(gchar *string, guint size);
 void clear_display(void);
 void save_vte_data();		
 int Send_chars(char *string, int length);	
+void set_local_echo();
+void clean_local_echo();
 #endif //#ifndef RightVboxFace_H_

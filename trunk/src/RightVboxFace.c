@@ -19,6 +19,7 @@
 static gboolean show_index = FALSE;
 static int bytes_per_line = 80;
 static int total_bytes = 0;
+static int local_echo_on = 0;
 GtkWidget *rcv_text;
 struct xcomdata *xcomdata;
 
@@ -160,8 +161,8 @@ gint send_serial(gchar *string, gint len)
 
 	bytes_written = Send_chars(string, len);
 	if(bytes_written > 0){
-		//if(echo_on)
-		//put_text(string, bytes_written);
+		if(local_echo_on)
+			put_text(string, bytes_written);
 	}
 
 	return bytes_written;
@@ -173,3 +174,14 @@ static void Got_Input(VteTerminal *widget, gchar *text, guint length, gpointer p
 		send_serial(text, length);
 }
 
+void set_local_echo()
+{
+	local_echo_on = 1;
+	debug_p("local echo: %d \n", local_echo_on);
+}
+
+void clean_local_echo()
+{
+	local_echo_on = 0;	
+	debug_p("local echo: %d \n", local_echo_on);
+}

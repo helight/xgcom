@@ -26,6 +26,7 @@ GtkWidget* create_menu (GtkWidget *main_windown, GtkWidget *main_vbox,
 
 	GtkWidget *menuitem_edit;
 	GtkWidget *menu_edit;
+	GtkWidget *local_echo;
 	GtkWidget *config;
 
 	GtkWidget *menuitem_tool;
@@ -61,6 +62,10 @@ GtkWidget* create_menu (GtkWidget *main_windown, GtkWidget *main_vbox,
 	menu_edit = gtk_menu_new ();
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem_edit), menu_edit);
 
+	local_echo = gtk_menu_item_new_with_mnemonic (_("_Local_Echo"));
+	gtk_widget_show (local_echo);
+	gtk_container_add (GTK_CONTAINER (menu_edit), local_echo);
+	
 	config = gtk_menu_item_new_with_mnemonic (_("_Configure"));
 	gtk_widget_show (config);
 	gtk_container_add (GTK_CONTAINER (menu_edit), config);
@@ -94,6 +99,9 @@ GtkWidget* create_menu (GtkWidget *main_windown, GtkWidget *main_vbox,
 	g_signal_connect ((gpointer) quit_file, "activate",
 		G_CALLBACK (on_quit_file_activate),
 		NULL);
+	g_signal_connect ((gpointer) local_echo, "activate",
+		G_CALLBACK (on_local_echo_activate),
+		(gpointer)xcomdata);
 	g_signal_connect ((gpointer) config, "activate",
 		G_CALLBACK (on_config_activate),
 		(gpointer)xcomdata);

@@ -17,6 +17,8 @@
 #define MenuCall_H_
 #include <gtk/gtk.h>
 #include "support.h"
+void
+on_local_echo_activate(GtkMenuItem *menuitem, gpointer user_data);
 
 void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data);

@@ -328,7 +328,7 @@ int open_uart(struct xcomdata *xcomdata)
                 perror("Open com error:\n");
                 char buff[512];
                 snprintf(buff, 512, "<b>Open com error!</b>\n\n"
-                "<b>Please: chmod 666 %s</b>", xcomdata->comcfg.port);
+                "<b>Please: chmod 666 %s or make sure it's ok!</b>", xcomdata->comcfg.port);
                 create_xgcom_msg(xcomdata->gmain, buff);
                 return -1;
         }
@@ -672,6 +672,6 @@ int Send_chars(char *string, int length)
 			bytes_written += write_uart("\n", 1);
 	}
 
-  return 0;
+  return bytes_written;
 }
 
