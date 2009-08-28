@@ -54,26 +54,22 @@ int main (int argc, char *argv[])
 	add_pixmap_directory ("./pixmaps");
 	add_pixmap_directory ("../pixmaps");
 	
-	if (!g_thread_supported ()) 
-		g_thread_init (NULL);
-	gdk_threads_init();
 	init_xcomdata(&xcomdata);
 	
 	main_windown = create_Xgcom (&xcomdata);
-	init_from_config_file(&xcomdata);
-	show_uart_param(&xcomdata);
 	
 	panel_icon_pixbuf = create_pixbuf ("zhwen.png");
 	icon = gtk_status_icon_new_from_pixbuf (panel_icon_pixbuf);
 	gtk_status_icon_set_tooltip(icon,"Xcomtool");
 	g_signal_connect((gpointer)icon, "activate", G_CALLBACK(callback_icon), main_windown);
-
+	
 	gtk_widget_show (main_windown);
 
-	gdk_threads_enter(); 
+	init_from_config_file(&xcomdata);
+	show_uart_param(&xcomdata);
+
 	gtk_main(); 
-	gdk_threads_leave(); 
-	return 0;
+ 	return 0;
 }
 
 void callback_icon(GtkStatusIcon *status_icon,gpointer data)

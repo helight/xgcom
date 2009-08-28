@@ -1,9 +1,9 @@
 CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
-  /usr/include/features.h /usr/include/bits/predefs.h \
-  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
-  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
-  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
-  /usr/include/time.h /usr/lib/gcc/i486-linux-gnu/4.3.3/include/stddef.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h /usr/include/time.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h \
   /usr/include/endian.h /usr/include/bits/endian.h \
   /usr/include/bits/byteswap.h /usr/include/sys/select.h \
   /usr/include/bits/select.h /usr/include/bits/sigset.h \
@@ -14,7 +14,7 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
   /usr/include/getopt.h /usr/include/string.h /usr/include/bits/string.h \
   /usr/include/bits/string2.h /usr/include/stdlib.h /usr/include/stdio.h \
   /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
-  /usr/lib/gcc/i486-linux-gnu/4.3.3/include/stdarg.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stdarg.h \
   /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
   /usr/include/bits/stdio.h /usr/include/alloca.h \
   /usr/include/gtk-2.0/gdk/gdkkeysyms.h /usr/include/gtk-2.0/gtk/gtk.h \
@@ -29,12 +29,12 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
   /usr/include/glib-2.0/glib/gtypes.h \
   /usr/lib/glib-2.0/include/glibconfig.h \
   /usr/include/glib-2.0/glib/gmacros.h \
-  /usr/lib/gcc/i486-linux-gnu/4.3.3/include-fixed/limits.h \
-  /usr/lib/gcc/i486-linux-gnu/4.3.3/include-fixed/syslimits.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/limits.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/syslimits.h \
   /usr/include/limits.h /usr/include/bits/posix1_lim.h \
   /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
   /usr/include/bits/posix2_lim.h \
-  /usr/lib/gcc/i486-linux-gnu/4.3.3/include/float.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/float.h \
   /usr/include/glib-2.0/glib/garray.h \
   /usr/include/glib-2.0/glib/gasyncqueue.h \
   /usr/include/glib-2.0/glib/gthread.h \
@@ -237,7 +237,6 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
   /usr/include/gtk-2.0/gtk/gtkaccessible.h \
   /usr/include/gtk-2.0/gtk/gtkaction.h \
   /usr/include/gtk-2.0/gtk/gtkactiongroup.h \
-  /usr/include/gtk-2.0/gtk/gtkactivatable.h \
   /usr/include/gtk-2.0/gtk/gtkalignment.h \
   /usr/include/gtk-2.0/gtk/gtkarrow.h \
   /usr/include/gtk-2.0/gtk/gtkaspectframe.h \
@@ -337,7 +336,6 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
   /usr/include/gtk-2.0/gtk/gtkmodules.h \
   /usr/include/gtk-2.0/gtk/gtkmountoperation.h \
   /usr/include/gtk-2.0/gtk/gtknotebook.h \
-  /usr/include/gtk-2.0/gtk/gtkorientable.h \
   /usr/include/gtk-2.0/gtk/gtkpagesetup.h \
   /usr/include/gtk-2.0/gtk/gtkpapersize.h \
   /usr/include/gtk-2.0/gtk/gtkplug.h /usr/include/gtk-2.0/gtk/gtksocket.h \
@@ -415,8 +413,6 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 
 /usr/include/features.h:
 
-/usr/include/bits/predefs.h:
-
 /usr/include/sys/cdefs.h:
 
 /usr/include/bits/wordsize.h:
@@ -431,7 +427,7 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 
 /usr/include/time.h:
 
-/usr/lib/gcc/i486-linux-gnu/4.3.3/include/stddef.h:
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h:
 
 /usr/include/endian.h:
 
@@ -479,7 +475,7 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/i486-linux-gnu/4.3.3/include/stdarg.h:
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stdarg.h:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -519,9 +515,9 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
-/usr/lib/gcc/i486-linux-gnu/4.3.3/include-fixed/limits.h:
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/limits.h:
 
-/usr/lib/gcc/i486-linux-gnu/4.3.3/include-fixed/syslimits.h:
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -533,7 +529,7 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 
 /usr/include/bits/posix2_lim.h:
 
-/usr/lib/gcc/i486-linux-gnu/4.3.3/include/float.h:
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/float.h:
 
 /usr/include/glib-2.0/glib/garray.h:
 
@@ -1001,8 +997,6 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 
 /usr/include/gtk-2.0/gtk/gtkactiongroup.h:
 
-/usr/include/gtk-2.0/gtk/gtkactivatable.h:
-
 /usr/include/gtk-2.0/gtk/gtkalignment.h:
 
 /usr/include/gtk-2.0/gtk/gtkarrow.h:
@@ -1208,8 +1202,6 @@ CfgFace.o: CfgFace.c ../config.h /usr/include/sys/types.h \
 /usr/include/gtk-2.0/gtk/gtkmountoperation.h:
 
 /usr/include/gtk-2.0/gtk/gtknotebook.h:
-
-/usr/include/gtk-2.0/gtk/gtkorientable.h:
 
 /usr/include/gtk-2.0/gtk/gtkpagesetup.h:
 
