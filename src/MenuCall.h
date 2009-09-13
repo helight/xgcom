@@ -1,5 +1,5 @@
 /*
- * Xcomtool (Xiyou Linux Group)
+ * XGCom (Xiyou Linux Group)
  *
  * Copyright (c) 2008-~  Xiyou Linux Group
  *
