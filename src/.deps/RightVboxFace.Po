@@ -1,7 +1,7 @@
 RightVboxFace.o: RightVboxFace.c /usr/include/string.h \
-  /usr/include/features.h /usr/include/sys/cdefs.h \
-  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
-  /usr/include/gnu/stubs-32.h \
+  /usr/include/features.h /usr/include/bits/predefs.h \
+  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
   /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h \
   /usr/include/bits/string.h /usr/include/bits/string2.h \
   /usr/include/endian.h /usr/include/bits/endian.h \
@@ -231,6 +231,7 @@ RightVboxFace.o: RightVboxFace.c /usr/include/string.h \
   /usr/include/gtk-2.0/gtk/gtkaccessible.h \
   /usr/include/gtk-2.0/gtk/gtkaction.h \
   /usr/include/gtk-2.0/gtk/gtkactiongroup.h \
+  /usr/include/gtk-2.0/gtk/gtkactivatable.h \
   /usr/include/gtk-2.0/gtk/gtkalignment.h \
   /usr/include/gtk-2.0/gtk/gtkarrow.h \
   /usr/include/gtk-2.0/gtk/gtkaspectframe.h \
@@ -330,6 +331,7 @@ RightVboxFace.o: RightVboxFace.c /usr/include/string.h \
   /usr/include/gtk-2.0/gtk/gtkmodules.h \
   /usr/include/gtk-2.0/gtk/gtkmountoperation.h \
   /usr/include/gtk-2.0/gtk/gtknotebook.h \
+  /usr/include/gtk-2.0/gtk/gtkorientable.h \
   /usr/include/gtk-2.0/gtk/gtkpagesetup.h \
   /usr/include/gtk-2.0/gtk/gtkpapersize.h \
   /usr/include/gtk-2.0/gtk/gtkplug.h /usr/include/gtk-2.0/gtk/gtksocket.h \
@@ -407,6 +409,8 @@ RightVboxFace.o: RightVboxFace.c /usr/include/string.h \
 /usr/include/string.h:
 
 /usr/include/features.h:
+
+/usr/include/bits/predefs.h:
 
 /usr/include/sys/cdefs.h:
 
@@ -970,6 +974,8 @@ RightVboxFace.o: RightVboxFace.c /usr/include/string.h \
 
 /usr/include/gtk-2.0/gtk/gtkactiongroup.h:
 
+/usr/include/gtk-2.0/gtk/gtkactivatable.h:
+
 /usr/include/gtk-2.0/gtk/gtkalignment.h:
 
 /usr/include/gtk-2.0/gtk/gtkarrow.h:
@@ -1175,6 +1181,8 @@ RightVboxFace.o: RightVboxFace.c /usr/include/string.h \
 /usr/include/gtk-2.0/gtk/gtkmountoperation.h:
 
 /usr/include/gtk-2.0/gtk/gtknotebook.h:
+
+/usr/include/gtk-2.0/gtk/gtkorientable.h:
 
 /usr/include/gtk-2.0/gtk/gtkpagesetup.h:
 

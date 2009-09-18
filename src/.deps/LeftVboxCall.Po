@@ -1,9 +1,9 @@
 LeftVboxCall.o: LeftVboxCall.c /usr/include/termios.h \
-  /usr/include/features.h /usr/include/sys/cdefs.h \
-  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
-  /usr/include/gnu/stubs-32.h /usr/include/bits/termios.h \
-  /usr/include/sys/ttydefaults.h /usr/include/fcntl.h \
-  /usr/include/bits/fcntl.h /usr/include/sys/types.h \
+  /usr/include/features.h /usr/include/bits/predefs.h \
+  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
+  /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
+  /usr/include/fcntl.h /usr/include/bits/fcntl.h /usr/include/sys/types.h \
   /usr/include/bits/types.h /usr/include/bits/typesizes.h \
   /usr/include/time.h /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h \
   /usr/include/endian.h /usr/include/bits/endian.h \
@@ -245,6 +245,7 @@ LeftVboxCall.o: LeftVboxCall.c /usr/include/termios.h \
   /usr/include/gtk-2.0/gtk/gtkaccessible.h \
   /usr/include/gtk-2.0/gtk/gtkaction.h \
   /usr/include/gtk-2.0/gtk/gtkactiongroup.h \
+  /usr/include/gtk-2.0/gtk/gtkactivatable.h \
   /usr/include/gtk-2.0/gtk/gtkalignment.h \
   /usr/include/gtk-2.0/gtk/gtkarrow.h \
   /usr/include/gtk-2.0/gtk/gtkaspectframe.h \
@@ -344,6 +345,7 @@ LeftVboxCall.o: LeftVboxCall.c /usr/include/termios.h \
   /usr/include/gtk-2.0/gtk/gtkmodules.h \
   /usr/include/gtk-2.0/gtk/gtkmountoperation.h \
   /usr/include/gtk-2.0/gtk/gtknotebook.h \
+  /usr/include/gtk-2.0/gtk/gtkorientable.h \
   /usr/include/gtk-2.0/gtk/gtkpagesetup.h \
   /usr/include/gtk-2.0/gtk/gtkpapersize.h \
   /usr/include/gtk-2.0/gtk/gtkplug.h /usr/include/gtk-2.0/gtk/gtksocket.h \
@@ -421,6 +423,8 @@ LeftVboxCall.o: LeftVboxCall.c /usr/include/termios.h \
 /usr/include/termios.h:
 
 /usr/include/features.h:
+
+/usr/include/bits/predefs.h:
 
 /usr/include/sys/cdefs.h:
 
@@ -1042,6 +1046,8 @@ LeftVboxCall.o: LeftVboxCall.c /usr/include/termios.h \
 
 /usr/include/gtk-2.0/gtk/gtkactiongroup.h:
 
+/usr/include/gtk-2.0/gtk/gtkactivatable.h:
+
 /usr/include/gtk-2.0/gtk/gtkalignment.h:
 
 /usr/include/gtk-2.0/gtk/gtkarrow.h:
@@ -1247,6 +1253,8 @@ LeftVboxCall.o: LeftVboxCall.c /usr/include/termios.h \
 /usr/include/gtk-2.0/gtk/gtkmountoperation.h:
 
 /usr/include/gtk-2.0/gtk/gtknotebook.h:
+
+/usr/include/gtk-2.0/gtk/gtkorientable.h:
 
 /usr/include/gtk-2.0/gtk/gtkpagesetup.h:
 
