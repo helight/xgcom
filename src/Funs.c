@@ -31,22 +31,28 @@ static int read_line(int fd, char *bufv);
 static int do_setconfig(struct xcomdata *xcomdata, char *bufv);
 
 
-void do_save_cfg_file(struct comcfg *comcfg, char *path)
+int do_save_cfg_file(struct comcfg *comcfg, char *path)
 {
 	FILE *fd;
 	
 	debug_p("path:%s\n", path);
 	fd = fopen(path, "w+");
-	if (fd == NULL)
+	if (fd == NULL) {
 		perror("open file");
+		return -1;
+	}
 	fprintf(fd, "port %s\n", comcfg->port);
 	fprintf(fd, "speed %d\n", comcfg->baud);
 	fprintf(fd, "databit %d\n", comcfg->databit);
 	fprintf(fd, "stopbit %d\n", comcfg->stopbit);
 	fprintf(fd, "parity %d\n", comcfg->parity);
 	fprintf(fd, "flow %d\n", comcfg->flow);
+	debug_p("save ok!!\n");
+	
 	fclose(fd);
+	return 0;
 }
+
 void save_cfg_file(struct xcomdata *xcomdata)
 {
 	struct comcfg *comcfg = &(xcomdata->comcfg);

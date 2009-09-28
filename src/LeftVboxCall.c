@@ -201,22 +201,26 @@ on_send_file_clicked (GtkButton *button, gpointer user_data)
 	
 	if (stat(xcomdata->send_file, &my_stat) == 0) {
 		fd = fopen(xcomdata->send_file, "r");
-		
+		if (fd == NULL) {
+			perror("open file");
+			return;
+		}
 		do{
-			fgets(frame, sizeof(frame), fd);
-			if (feof(fd) != 0)
+			if (feof(fd) == 1)
 				break;
-			printf("send: %s \n", frame);
+			memset(frame,'\0',sizeof(frame));
+			fgets(frame, sizeof(frame), fd);
+			debug_p("send click: %s \n", frame);
 			len = strlen(frame);
 			ret = write_uart(frame, len);
 			if (ret < 0)
-				perror("write error:\n");
-			memset(frame,'\0',sizeof(frame));
+				perror("write error:\n");			
 		}while(1);//end while
 		
 		fclose(fd);
 	} else {
-		  create_xgcom_msg(xcomdata->gmain, "<b>Cann't Open the file!!!</b>");
+		debug_p("send_file: %s \n", xcomdata->send_file);
+		create_xgcom_msg(xcomdata->gmain, "<b>Cann't Open the file!!!</b>");
 	}
 }
 

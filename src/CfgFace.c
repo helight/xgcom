@@ -295,7 +295,7 @@ on_save_button_clicked (GtkButton *button, gpointer user_data)
 {	
 	char path[256] = {0};
 	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
-	sprintf(path, "%s/.xgcom.conf", getenv("HOME"));
+	sprintf(path, "%s/.xgcom/xgcom.conf", getenv("HOME"));
 	printf("path: %s \n", path);
 	get_data_from_window(xcomdata);
 	do_save_cfg_file(&(xcomdata->comcfg), path);

@@ -20,7 +20,7 @@
 
 void on_button_cancel_clicked (GtkButton *button, gpointer user_data);
 void on_button_ok_clicked (GtkButton *button, gpointer user_data);
-static GtkWidget *file_choose;
+GtkWidget *file_choose;
 
 
 GtkWidget* create_file_choose (struct xcomdata *xcomdata)
@@ -30,10 +30,15 @@ GtkWidget* create_file_choose (struct xcomdata *xcomdata)
 	GtkWidget *button_cancel;
 	GtkWidget *button_ok;
 
-	if(xcomdata->choose_file < 2)
+	if(xcomdata->choose_file < 2) {
 		file_choose = gtk_file_chooser_dialog_new ("", NULL, GTK_FILE_CHOOSER_ACTION_OPEN, NULL);
-	else
+		button_ok = gtk_button_new_from_stock ("gtk-open");
+	} else {
 		file_choose = gtk_file_chooser_dialog_new ("", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, NULL);
+		button_ok = gtk_button_new_from_stock ("gtk-save");
+	}
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (file_choose), TRUE);
+	g_object_set (file_choose, "show-hidden", TRUE, NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (file_choose), GDK_WINDOW_TYPE_HINT_DIALOG);
 
 	dialog_vbox = GTK_DIALOG (file_choose)->vbox;
@@ -43,12 +48,12 @@ GtkWidget* create_file_choose (struct xcomdata *xcomdata)
 	gtk_widget_show (dialog_action_area);
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area), GTK_BUTTONBOX_END);
 
-	button_cancel = gtk_button_new_from_stock ("gtk\55cancel");
+	button_cancel = gtk_button_new_from_stock ("gtk-cancel");
 	gtk_widget_show (button_cancel);
 	gtk_dialog_add_action_widget (GTK_DIALOG (file_choose), button_cancel, GTK_RESPONSE_CANCEL);
 	GTK_WIDGET_SET_FLAGS (button_cancel, GTK_CAN_DEFAULT);
 
-	button_ok = gtk_button_new_from_stock ("gtk\55open");
+	
 	gtk_widget_show (button_ok);
 	gtk_dialog_add_action_widget (GTK_DIALOG (file_choose), button_ok, GTK_RESPONSE_OK);
 	GTK_WIDGET_SET_FLAGS (button_ok, GTK_CAN_DEFAULT);
@@ -90,8 +95,6 @@ void on_button_ok_clicked (GtkButton *button, gpointer user_data)
 			strcpy(xcomdata->cfg_file, filename);
 			debug_p("save cfg file : %s \n", filename);
 			save_cfg_file(xcomdata);
-			break;
-		case 3:
 			break;
 		default:
 			break;
