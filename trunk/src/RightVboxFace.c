@@ -45,7 +45,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	right_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (right_vbox);
 	gtk_box_pack_start (GTK_BOX (body_hbox), right_vbox, TRUE, TRUE, 0);
-	gtk_widget_set_size_request (right_vbox, 380, -1);
+	gtk_widget_set_size_request (right_vbox, 500, -1);
 
 	rcv_frame = gtk_frame_new (NULL);
 	gtk_widget_show (rcv_frame);
