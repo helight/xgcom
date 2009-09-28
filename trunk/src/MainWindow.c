@@ -53,11 +53,11 @@ GtkWidget* create_Xgcom (struct xcomdata *xcomdata)
 	accel_group = gtk_accel_group_new ();
 
 	main_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_widget_set_size_request (main_window, 600, 700);
+	//gtk_widget_set_size_request (main_window, 600, 700);
 	GTK_WIDGET_SET_FLAGS (main_window, GTK_CAN_FOCUS);
 	GTK_WIDGET_SET_FLAGS (main_window, GTK_CAN_DEFAULT);
 	gtk_window_set_title (GTK_WINDOW (main_window), _("XGCom (Xiyou-Linux-Group)"));
-	gtk_window_set_default_size (GTK_WINDOW (main_window), 600, 700);
+	//gtk_window_set_default_size (GTK_WINDOW (main_window), 600, 700);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (main_window), TRUE);
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 	Xgcom_icon_pixbuf = create_pixbuf ("zhwen.png");

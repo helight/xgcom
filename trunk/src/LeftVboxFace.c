@@ -101,7 +101,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	left_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (left_vbox);
 	gtk_box_pack_start (GTK_BOX (body_hbox), left_vbox, FALSE, FALSE, 0);
-	gtk_widget_set_size_request (left_vbox, 120, 700);
+	gtk_widget_set_size_request (left_vbox, 120, -1);
 
 	left_top_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (left_top_vbox);
