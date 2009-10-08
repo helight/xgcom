@@ -397,7 +397,7 @@ MenuCall.o: MenuCall.c Cfg.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/gtk-2.0/gtk/gtkpreview.h \
   /usr/include/gtk-2.0/gtk/gtktipsquery.h support.h ../config.h debug.h \
   /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
-  MenuCall.h LeftVboxFace.h RightVboxFace.h
+  Serie.h MenuCall.h LeftVboxFace.h RightVboxFace.h
 
 Cfg.h:
 
@@ -1318,6 +1318,8 @@ debug.h:
 /usr/include/locale.h:
 
 /usr/include/bits/locale.h:
+
+Serie.h:
 
 MenuCall.h:
 

@@ -416,9 +416,9 @@ Serie.o: Serie.c /usr/include/termios.h /usr/include/features.h \
   /usr/include/gtk-2.0/gtk/gtktipsquery.h \
   /usr/include/vte/vtetypebuiltins.h /usr/include/vte/vteversion.h \
   /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
-  /usr/include/bits/setjmp.h RightVboxFace.h support.h ../config.h \
-  debug.h /usr/include/libintl.h /usr/include/locale.h \
-  /usr/include/bits/locale.h Serie.h Funs.h
+  /usr/include/bits/setjmp.h Serie.h support.h ../config.h debug.h \
+  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
+  Funs.h SendFile.h
 
 /usr/include/termios.h:
 
@@ -1412,7 +1412,7 @@ Serie.o: Serie.c /usr/include/termios.h /usr/include/features.h \
 
 /usr/include/bits/setjmp.h:
 
-RightVboxFace.h:
+Serie.h:
 
 support.h:
 
@@ -1426,6 +1426,6 @@ debug.h:
 
 /usr/include/bits/locale.h:
 
-Serie.h:
-
 Funs.h:
+
+SendFile.h:

@@ -133,7 +133,7 @@ void init_from_config_file(struct xcomdata *xcomdata)
 	struct stat my_stat;
 	char path[256] = {0};
 	
-	sprintf(path, "%s/.xgcom.conf", getenv("HOME"));
+	sprintf(path, "%s/.xgcom/.xgcom.conf", getenv("HOME"));
 	printf("path: %s \n", path);
 	if(stat(path, &my_stat) == 0)
 		do_read_config(xcomdata, path);

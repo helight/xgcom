@@ -1,5 +1,12 @@
-MenuFace.o: MenuFace.c MenuFace.h /usr/include/gtk-2.0/gtk/gtk.h \
-  /usr/include/gtk-2.0/gdk/gdk.h \
+MenuFace.o: MenuFace.c /usr/include/dirent.h /usr/include/features.h \
+  /usr/include/bits/predefs.h /usr/include/sys/cdefs.h \
+  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-32.h /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h /usr/include/bits/dirent.h \
+  /usr/include/bits/posix1_lim.h /usr/include/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h MenuFace.h \
+  /usr/include/gtk-2.0/gtk/gtk.h /usr/include/gtk-2.0/gdk/gdk.h \
   /usr/include/gtk-2.0/gdk/gdkapplaunchcontext.h \
   /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
   /usr/include/glib-2.0/gio/gioenums.h \
@@ -10,15 +17,9 @@ MenuFace.o: MenuFace.c MenuFace.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/glib-2.0/glib/gtypes.h \
   /usr/lib/glib-2.0/include/glibconfig.h \
   /usr/include/glib-2.0/glib/gmacros.h \
-  /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h \
   /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/limits.h \
   /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/syslimits.h \
-  /usr/include/limits.h /usr/include/features.h \
-  /usr/include/bits/predefs.h /usr/include/sys/cdefs.h \
-  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
-  /usr/include/gnu/stubs-32.h /usr/include/bits/posix1_lim.h \
-  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
-  /usr/include/bits/posix2_lim.h \
+  /usr/include/limits.h /usr/include/bits/posix2_lim.h \
   /usr/lib/gcc/i486-linux-gnu/4.3.2/include/float.h \
   /usr/include/glib-2.0/glib/garray.h \
   /usr/include/glib-2.0/glib/gasyncqueue.h \
@@ -28,8 +29,7 @@ MenuFace.o: MenuFace.c MenuFace.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/lib/gcc/i486-linux-gnu/4.3.2/include/stdarg.h \
   /usr/include/glib-2.0/glib/gatomic.h \
   /usr/include/glib-2.0/glib/gbacktrace.h /usr/include/signal.h \
-  /usr/include/bits/sigset.h /usr/include/bits/types.h \
-  /usr/include/bits/typesizes.h /usr/include/bits/signum.h \
+  /usr/include/bits/sigset.h /usr/include/bits/signum.h \
   /usr/include/time.h /usr/include/bits/siginfo.h \
   /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
   /usr/include/bits/sigstack.h /usr/include/bits/pthreadtypes.h \
@@ -399,6 +399,34 @@ MenuFace.o: MenuFace.c MenuFace.h /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
   MenuCall.h
 
+/usr/include/dirent.h:
+
+/usr/include/features.h:
+
+/usr/include/bits/predefs.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-32.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/bits/dirent.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h:
+
 MenuFace.h:
 
 /usr/include/gtk-2.0/gtk/gtk.h:
@@ -429,31 +457,11 @@ MenuFace.h:
 
 /usr/include/glib-2.0/glib/gmacros.h:
 
-/usr/lib/gcc/i486-linux-gnu/4.3.2/include/stddef.h:
-
 /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/limits.h:
 
 /usr/lib/gcc/i486-linux-gnu/4.3.2/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
-
-/usr/include/features.h:
-
-/usr/include/bits/predefs.h:
-
-/usr/include/sys/cdefs.h:
-
-/usr/include/bits/wordsize.h:
-
-/usr/include/gnu/stubs.h:
-
-/usr/include/gnu/stubs-32.h:
-
-/usr/include/bits/posix1_lim.h:
-
-/usr/include/bits/local_lim.h:
-
-/usr/include/linux/limits.h:
 
 /usr/include/bits/posix2_lim.h:
 
@@ -480,10 +488,6 @@ MenuFace.h:
 /usr/include/signal.h:
 
 /usr/include/bits/sigset.h:
-
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
 
 /usr/include/bits/signum.h:
 

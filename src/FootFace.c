@@ -27,7 +27,7 @@ create_foot (GtkWidget *main_window, GtkWidget *main_vbox, struct xcomdata *xcom
 	gtk_widget_show (foot_hbox);
 	gtk_box_pack_start (GTK_BOX (main_vbox), foot_hbox, FALSE, FALSE, 0);
 
-	conf_label = gtk_label_new (_("\351\205\215\347\275\256\345\217\202\346\225\260\72"));
+	conf_label = gtk_label_new (_("Parameter: "));
 	gtk_widget_show (conf_label);
 	gtk_box_pack_start (GTK_BOX (foot_hbox), conf_label, FALSE, FALSE, 0);
 	gtk_widget_set_size_request (conf_label, 80, 20);
@@ -38,7 +38,7 @@ create_foot (GtkWidget *main_window, GtkWidget *main_vbox, struct xcomdata *xcom
 	gtk_misc_set_alignment (GTK_MISC (conf_parameter), 0, 0.5);
 	gtk_widget_set_size_request (conf_parameter, -1, 20);
 	
-	com_label = gtk_label_new (_("\347\212\266\346\200\201\72"));
+	com_label = gtk_label_new (_("State: "));
 	gtk_widget_show (com_label);
 	gtk_box_pack_start (GTK_BOX (foot_hbox), com_label, FALSE, FALSE, 0);
 	gtk_widget_set_size_request (com_label, 50, 20);

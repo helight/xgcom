@@ -22,6 +22,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	GtkWidget *left_vbox;
 	GtkWidget *left_top_vbox;
 	GtkWidget *left_foot_vbox;
+	
 	GtkWidget *table_conf;
 	GtkWidget *conf_button;
 	GtkWidget *save_conf;
@@ -55,10 +56,6 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	GtkWidget *save_data;
 	GtkWidget *fixed15;
 	GtkWidget *fixed16;
-	GtkWidget *fixed17;
-	GtkWidget *fixed18;
-	GtkWidget *fixed19;
-	GtkWidget *fixed20;
 	GtkWidget *frame_save;
 	GtkWidget *alignment3;
 	GtkWidget *vbox_frame_save;
@@ -79,6 +76,8 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	GtkWidget *fixed26;
 	GtkWidget *fixed27;
 	GtkWidget *fixed28;
+	GtkWidget *table_free_space;
+	GtkWidget *fixed_free_space;
 	GtkWidget *table_hex_send;
 	GtkWidget *hex_send;
 	GtkWidget *keep_send;
@@ -93,10 +92,12 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	GtkWidget *fixed34;	
 	GtkWidget *left_top;
 	GtkWidget *left_bottom;
-
+	GtkWidget *button1;
+  
 	left_top = gtk_fixed_new();
 	gtk_widget_show(left_top);
-	gtk_box_pack_start(GTK_BOX(left_vbox), left_top, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(left_vbox), left_top, TRUE, TRUE, 0);
+	//gtk_widget_set_size_request (table_conf, 120, 30);
 	
 	left_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (left_vbox);
@@ -107,39 +108,46 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_widget_show (left_top_vbox);
 	gtk_box_pack_start (GTK_BOX (left_vbox), left_top_vbox, FALSE, TRUE, 0);
 	
-	table_conf = gtk_table_new (4, 3, FALSE);
+	table_conf = gtk_table_new (5, 3, FALSE);
 	gtk_widget_show (table_conf);
 	gtk_box_pack_start (GTK_BOX (left_top_vbox), table_conf, FALSE, FALSE, 0);
-	
+	//gtk_widget_set_size_request (table_conf, 110, 165);
 
-	conf_button = gtk_button_new_with_mnemonic (_("\344\270\262\345\217\243\351\205\215\347\275\256"));
+	conf_button = gtk_button_new_with_mnemonic (_("Configure"));
 	gtk_widget_show (conf_button);
 	gtk_table_attach (GTK_TABLE (table_conf), conf_button, 1, 2, 0, 1,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (conf_button), 2);
 
-	save_conf = gtk_button_new_with_mnemonic (_("\344\277\235\345\255\230\351\205\215\347\275\256"));
+	save_conf = gtk_button_new_with_mnemonic (_("Save Conf"));
 	gtk_widget_show (save_conf);
 	gtk_table_attach (GTK_TABLE (table_conf), save_conf, 1, 2, 1, 2,
 		(GtkAttachOptions) (GTK_FILL), 
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (save_conf), 2);
 
-	open_uart = gtk_button_new_with_mnemonic (_("\346\211\223\345\274\200\344\270\262\345\217\243"));
+	load_conf = gtk_button_new_with_mnemonic (_("Load Conf"));
+	gtk_widget_show (load_conf);
+	gtk_table_attach (GTK_TABLE (table_conf), load_conf, 1, 2, 2, 3,
+		(GtkAttachOptions) (GTK_FILL), 
+		(GtkAttachOptions) (0), 0, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (load_conf), 2);
+	
+	open_uart = gtk_button_new_with_mnemonic (_("Open Com"));
 	gtk_widget_show (open_uart);
 	gtk_table_attach (GTK_TABLE (table_conf), open_uart, 1, 2, 3, 4,
 		(GtkAttachOptions) (GTK_FILL), 
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (open_uart), 2);
 
-	load_conf = gtk_button_new_with_mnemonic (_("\350\275\275\345\205\245\351\205\215\347\275\256"));
-	gtk_widget_show (load_conf);
-	gtk_table_attach (GTK_TABLE (table_conf), load_conf, 1, 2, 2, 3,
-		(GtkAttachOptions) (GTK_FILL), 
+	clean_rcv_buff = gtk_button_new_with_mnemonic (_("Clear Rcv"));
+	gtk_widget_show (clean_rcv_buff);
+	gtk_table_attach (GTK_TABLE (table_conf), clean_rcv_buff, 1, 2, 4, 5,
+		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (load_conf), 2);
-
+	gtk_container_set_border_width (GTK_CONTAINER (clean_rcv_buff), 2);
+	
 	fixed1 = gtk_fixed_new ();
 	gtk_widget_show (fixed1);
 	gtk_table_attach (GTK_TABLE (table_conf), fixed1, 0, 1, 0, 1,
@@ -163,7 +171,11 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_table_attach (GTK_TABLE (table_conf), fixed4, 0, 1, 3, 4,
 		(GtkAttachOptions) (GTK_FILL), 
 		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
+		
+	gtk_table_attach (GTK_TABLE (table_conf), fixed4, 0, 1, 4, 5,
+		(GtkAttachOptions) (GTK_FILL), 
+		(GtkAttachOptions) (GTK_FILL), 0, 0);
+		
 	fixed5 = gtk_fixed_new ();
 	gtk_widget_show (fixed5);
 	gtk_table_attach (GTK_TABLE (table_conf), fixed5, 2, 3, 0, 1,
@@ -187,12 +199,16 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_table_attach (GTK_TABLE (table_conf), fixed8, 2, 3, 3, 4,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
+		
+	gtk_table_attach (GTK_TABLE (table_conf), fixed8, 2, 3, 4, 5,
+		(GtkAttachOptions) (GTK_FILL),
+		(GtkAttachOptions) (GTK_FILL), 0, 0);
+		
 	table_hex = gtk_table_new (3, 3, FALSE);
 	gtk_widget_show (table_hex);
 	gtk_box_pack_start (GTK_BOX (left_top_vbox), table_hex, FALSE, FALSE, 0);
 
-	hex_show = gtk_check_button_new_with_mnemonic (_("HEX \346\230\276\347\244\272"));
+	hex_show = gtk_check_button_new_with_mnemonic (_("HEX Show"));
 	gtk_widget_show (hex_show);
 	gtk_table_attach (GTK_TABLE (table_hex), hex_show, 1, 2, 0, 1,
 		(GtkAttachOptions) (GTK_FILL),
@@ -205,7 +221,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
-	send_num_label = gtk_label_new (_("\345\217\221\351\200\201"));
+	send_num_label = gtk_label_new (_("S:"));
 	gtk_widget_show (send_num_label);
 	gtk_box_pack_start (GTK_BOX (hbox_send), send_num_label, FALSE, FALSE, 0);
 
@@ -223,7 +239,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
-	rcv_num_label = gtk_label_new (_("\346\216\245\346\224\266"));
+	rcv_num_label = gtk_label_new (_("R:"));
 	gtk_widget_show (rcv_num_label);
 	gtk_box_pack_start (GTK_BOX (hbox_rcv), rcv_num_label, FALSE, FALSE, 0);
 
@@ -271,30 +287,18 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (GTK_FILL), 0, 0);
 
-	table_flush = gtk_table_new (3, 3, FALSE);
+	table_flush = gtk_table_new (1, 3, FALSE);
 	gtk_widget_show (table_flush);
 	gtk_box_pack_start (GTK_BOX (left_top_vbox), table_flush, TRUE, TRUE, 0);
+	//gtk_widget_set_size_request (table_flush, 110, 20);
 
-	new_count = gtk_button_new_with_mnemonic (_("\351\207\215\346\226\260\350\256\241\346\225\260"));
+	new_count = gtk_button_new_with_mnemonic (_("Recount"));
 	gtk_widget_show (new_count);
 	gtk_table_attach (GTK_TABLE (table_flush), new_count, 1, 2, 0, 1,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (new_count), 2);
 
-	clean_rcv_buff = gtk_button_new_with_mnemonic (_("\346\270\205\346\216\245\346\224\266\345\214\272"));
-	gtk_widget_show (clean_rcv_buff);
-	gtk_table_attach (GTK_TABLE (table_flush), clean_rcv_buff, 1, 2, 1, 2,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (0), 0, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (clean_rcv_buff), 2);
-
-	save_data = gtk_button_new_with_mnemonic (_("捕获数据"));
-	gtk_widget_show (save_data);
-	gtk_table_attach (GTK_TABLE (table_flush), save_data, 1, 2, 2, 3,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (0), 0, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (save_data), 2);
 
 	fixed15 = gtk_fixed_new ();
 	gtk_widget_show (fixed15);
@@ -302,64 +306,46 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 		(GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 		(GtkAttachOptions) (GTK_FILL), 0, 0);
 
+	
 	fixed16 = gtk_fixed_new ();
 	gtk_widget_show (fixed16);
 	gtk_table_attach (GTK_TABLE (table_flush), fixed16, 2, 3, 0, 1,
 		(GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
-	fixed17 = gtk_fixed_new ();
-	gtk_widget_show (fixed17);
-	gtk_table_attach (GTK_TABLE (table_flush), fixed17, 0, 1, 1, 2,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
-	fixed18 = gtk_fixed_new ();
-	gtk_widget_show (fixed18);
-	gtk_table_attach (GTK_TABLE (table_flush), fixed18, 2, 3, 1, 2,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
-	fixed19 = gtk_fixed_new ();
-	gtk_widget_show (fixed19);
-	gtk_table_attach (GTK_TABLE (table_flush), fixed19, 0, 1, 2, 3,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
-	fixed20 = gtk_fixed_new ();
-	gtk_widget_show (fixed20);
-	gtk_table_attach (GTK_TABLE (table_flush), fixed20, 2, 3, 2, 3,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (GTK_FILL), 0, 0);
-
+	
 	frame_save = gtk_frame_new (NULL);
 	gtk_widget_show (frame_save);
 	gtk_box_pack_start (GTK_BOX (left_top_vbox), frame_save, FALSE, FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (frame_save), 2);
-	//gtk_widget_set_size_request (frame_save, 100, 100);
+	//gtk_widget_set_size_request (frame_save, 110, 100);
 	
 	alignment3 = gtk_alignment_new (0.5, 0.5, 1, 1);
 	gtk_widget_show (alignment3);
 	gtk_container_add (GTK_CONTAINER (frame_save), alignment3);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment3), 0, 0, 12, 0);
-
+	
 	vbox_frame_save = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (vbox_frame_save);
 	gtk_container_add (GTK_CONTAINER (alignment3), vbox_frame_save);
 
-	add_save = gtk_radio_button_new_with_mnemonic (NULL, _("\350\277\275\345\212\240\344\277\235\345\255\230"));
+	save_data = gtk_button_new_with_mnemonic (_("Log Date"));
+	gtk_widget_show (save_data);
+	gtk_box_pack_start (GTK_BOX (vbox_frame_save), save_data, FALSE, FALSE, 0);
+	gtk_widget_set_size_request (save_data, 50, -1);
+	
+	add_save = gtk_radio_button_new_with_mnemonic (NULL, _("Append"));
 	gtk_widget_show (add_save);
 	gtk_box_pack_start (GTK_BOX (vbox_frame_save), add_save, FALSE, FALSE, 0);
 	gtk_radio_button_set_group (GTK_RADIO_BUTTON (add_save), add_save_group);
 	add_save_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (add_save));
 
-	cover_save = gtk_radio_button_new_with_mnemonic (NULL, _("\350\246\206\347\233\226\344\277\235\345\255\230"));
+	cover_save = gtk_radio_button_new_with_mnemonic (NULL, _("Cover"));
 	gtk_widget_show (cover_save);
 	gtk_box_pack_start (GTK_BOX (vbox_frame_save), cover_save, FALSE, FALSE, 0);
 	gtk_radio_button_set_group (GTK_RADIO_BUTTON (cover_save), add_save_group);
 	add_save_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (cover_save));
 
-	save_label = gtk_label_new (_("捕获选项"));
+	save_label = gtk_label_new (_("Log Date"));
 	gtk_widget_show (save_label);
 	gtk_frame_set_label_widget (GTK_FRAME (frame_save), save_label);
 	gtk_label_set_use_markup (GTK_LABEL (save_label), TRUE);
@@ -368,39 +354,49 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_widget_show (left_foot_vbox);
 	gtk_box_pack_start (GTK_BOX (left_vbox), left_foot_vbox, TRUE, FALSE, 0);
   
+	table_free_space = gtk_table_new (1, 1, FALSE);
+	gtk_widget_show (table_free_space);
+	gtk_box_pack_start (GTK_BOX (left_foot_vbox), table_free_space, FALSE, FALSE, 0);
+	
+	fixed_free_space = gtk_fixed_new ();
+	gtk_widget_show (fixed_free_space);
+	gtk_table_attach (GTK_TABLE (fixed_free_space), fixed_free_space, 1, 1, 1, 1,
+		(GtkAttachOptions) (GTK_FILL),
+		(GtkAttachOptions) (GTK_FILL), 0, 0);
+		
 	table_send_file = gtk_table_new (4, 3, FALSE);
 	gtk_widget_show (table_send_file);
 	gtk_box_pack_start (GTK_BOX (left_foot_vbox), table_send_file, FALSE, FALSE, 0);
-	//gtk_widget_set_size_request (table_send_file, 100, 120);
+	//gtk_widget_set_size_request (table_send_file, 110, 130);
 	
-	choose_file = gtk_button_new_with_mnemonic (_("\351\200\211\346\213\251\346\226\207\344\273\266"));
+	choose_file = gtk_button_new_with_mnemonic (_("Select File"));
 	gtk_widget_show (choose_file);
 	gtk_table_attach (GTK_TABLE (table_send_file), choose_file, 1, 2, 0, 1,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (choose_file), 2);
 
-	send_file = gtk_button_new_with_mnemonic (_("\345\217\221\351\200\201\346\226\207\344\273\266"));
+	send_file = gtk_button_new_with_mnemonic (_("Send File"));
 	gtk_widget_show (send_file);
 	gtk_table_attach (GTK_TABLE (table_send_file), send_file, 1, 2, 1, 2,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (send_file), 2);
 
-	clean_send_buff = gtk_button_new_with_mnemonic (_("\346\270\205\345\217\221\351\200\201\345\214\272"));
-	gtk_widget_show (clean_send_buff);
-	gtk_table_attach (GTK_TABLE (table_send_file), clean_send_buff, 1, 2, 2, 3,
-		(GtkAttachOptions) (GTK_FILL),
-		(GtkAttachOptions) (0), 0, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (clean_send_buff), 2);
-
-	send_data = gtk_button_new_with_mnemonic (_("\345\217\221\351\200\201\346\225\260\346\215\256"));
+	send_data = gtk_button_new_with_mnemonic (_("Send Data"));
 	gtk_widget_show (send_data);
-	gtk_table_attach (GTK_TABLE (table_send_file), send_data, 1, 2, 3, 4,
+	gtk_table_attach (GTK_TABLE (table_send_file), send_data, 1, 2, 2, 3,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (send_data), 2);
 
+	clean_send_buff = gtk_button_new_with_mnemonic (_("Clear Send"));
+	gtk_widget_show (clean_send_buff);
+	gtk_table_attach (GTK_TABLE (table_send_file), clean_send_buff, 1, 2, 3, 4,
+		(GtkAttachOptions) (GTK_FILL),
+		(GtkAttachOptions) (0), 0, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (clean_send_buff), 2);
+	
 	fixed21 = gtk_fixed_new ();
 	gtk_widget_show (fixed21);
 	gtk_table_attach (GTK_TABLE (table_send_file), fixed21, 2, 3, 0, 1,
@@ -452,15 +448,15 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	table_hex_send = gtk_table_new (3, 3, FALSE);
 	gtk_widget_show (table_hex_send);
 	gtk_box_pack_start (GTK_BOX (left_foot_vbox), table_hex_send, FALSE, FALSE, 0);
-	//gtk_widget_set_size_request (table_send_file, 100, 140);
+	//gtk_widget_set_size_request (table_hex_send, 110, 50);
 	
-	hex_send = gtk_check_button_new_with_mnemonic (_("HEX\345\217\221\351\200\201"));
+	hex_send = gtk_check_button_new_with_mnemonic (_("HEX Send"));
 	gtk_widget_show (hex_send);
 	gtk_table_attach (GTK_TABLE (table_hex_send), hex_send, 1, 2, 0, 1,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (0), 0, 0);
 
-	keep_send = gtk_check_button_new_with_mnemonic (_("\350\277\236\347\273\255\345\217\221\351\200\201"));
+	keep_send = gtk_check_button_new_with_mnemonic (_("Continual"));
 	gtk_widget_show (keep_send);
 	gtk_table_attach (GTK_TABLE (table_hex_send), keep_send, 1, 2, 1, 2,
 		(GtkAttachOptions) (GTK_FILL),
@@ -475,7 +471,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 		(GtkAttachOptions) (GTK_FILL),
 		(GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
-	time_label = gtk_label_new (_("\351\227\264\351\232\224"));
+	time_label = gtk_label_new (_("Interval:"));
 	gtk_widget_show (time_label);
 	gtk_box_pack_start (GTK_BOX (hbox_interval), time_label, FALSE, FALSE, 0);
 
