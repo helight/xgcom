@@ -14,16 +14,33 @@
  */
 
 #include "Cfg.h"
+#include "Serie.h"
 #include "MenuCall.h"
 #include "LeftVboxFace.h"
 #include "RightVboxFace.h"
 
 void
+on_send_uboot_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
+	
+	send_uboot(xcomdata);
+	debug_p("send_uboot\n");
+}
+
+void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data)
 {
-	printf("bey world;\n");
+	debug_p("bey world;\n");
 	close_uart();
 	gtk_main_quit();
+}
+
+void
+on_send_break_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	sendbreak();
+	debug_p("send_break\n");
 }
 
 void
@@ -60,6 +77,14 @@ on_ascii_talbe_activate (GtkMenuItem *menuitem, gpointer user_data)
 }
 
 void
+on_tools_item_activate (GtkMenuItem *menuitem, gpointer user_data)
+{
+	char *ch = (char *)user_data;
+	
+	debug_p("on_tools_item_activate: %s\n", ch);
+}
+
+void
 on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	gchar help_msg[1024];
@@ -83,7 +108,6 @@ on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data)
 		"13.本地回显.");
 
 	create_xgcom_msg ((GtkWidget *)user_data, help_msg);
-
 }
 
 void

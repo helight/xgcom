@@ -68,7 +68,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_widget_show (rcv_text);
 	gtk_container_add (GTK_CONTAINER (scrolledwindow2), rcv_text);
 	
-	rcv_label = gtk_label_new (_("\74b\76\346\216\245\346\224\266\345\214\272\74\57b\76"));
+	rcv_label = gtk_label_new (_("Receive:"));
 	gtk_widget_show (rcv_label);
 	gtk_frame_set_label_widget (GTK_FRAME (rcv_frame), rcv_label);
 	gtk_label_set_use_markup (GTK_LABEL (rcv_label), TRUE);
@@ -92,7 +92,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (send_text), GTK_WRAP_CHAR);
 	gtk_container_add (GTK_CONTAINER (scrolledwindow1), send_text);
 	
-	send_label = gtk_label_new (_("\74b\76\345\217\221\351\200\201\345\214\272\72\74\57b\76"));
+	send_label = gtk_label_new (_("Send:"));
 	gtk_widget_show (send_label);
 	gtk_frame_set_label_widget (GTK_FRAME (send_frame), send_label);
 	gtk_label_set_use_markup (GTK_LABEL (send_label), TRUE);

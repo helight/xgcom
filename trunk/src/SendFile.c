@@ -20,7 +20,7 @@
 
 void on_button_cancel_clicked (GtkButton *button, gpointer user_data);
 void on_button_ok_clicked (GtkButton *button, gpointer user_data);
-GtkWidget *file_choose;
+static GtkWidget *file_choose;
 
 
 GtkWidget* create_file_choose (struct xcomdata *xcomdata)
@@ -37,8 +37,6 @@ GtkWidget* create_file_choose (struct xcomdata *xcomdata)
 		file_choose = gtk_file_chooser_dialog_new ("", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, NULL);
 		button_ok = gtk_button_new_from_stock ("gtk-save");
 	}
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (file_choose), TRUE);
-	g_object_set (file_choose, "show-hidden", TRUE, NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (file_choose), GDK_WINDOW_TYPE_HINT_DIALOG);
 
 	dialog_vbox = GTK_DIALOG (file_choose)->vbox;
@@ -53,7 +51,6 @@ GtkWidget* create_file_choose (struct xcomdata *xcomdata)
 	gtk_dialog_add_action_widget (GTK_DIALOG (file_choose), button_cancel, GTK_RESPONSE_CANCEL);
 	GTK_WIDGET_SET_FLAGS (button_cancel, GTK_CAN_DEFAULT);
 
-	
 	gtk_widget_show (button_ok);
 	gtk_dialog_add_action_widget (GTK_DIALOG (file_choose), button_ok, GTK_RESPONSE_OK);
 	GTK_WIDGET_SET_FLAGS (button_ok, GTK_CAN_DEFAULT);
@@ -84,7 +81,7 @@ void on_button_ok_clicked (GtkButton *button, gpointer user_data)
 	switch (xcomdata->choose_file ){	
 		case 0:
 			strcpy(xcomdata->cfg_file, filename);
-			debug_p("save cfg file : %s \n", filename);
+			debug_p("load cfg file : %s \n", filename);
 			read_config(xcomdata);
 			break;
 		case 1:
@@ -95,6 +92,8 @@ void on_button_ok_clicked (GtkButton *button, gpointer user_data)
 			strcpy(xcomdata->cfg_file, filename);
 			debug_p("save cfg file : %s \n", filename);
 			save_cfg_file(xcomdata);
+			break;
+		case 3:
 			break;
 		default:
 			break;

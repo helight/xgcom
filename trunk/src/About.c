@@ -57,14 +57,12 @@ GtkWidget* create_about_xcomtool (GtkWidget *main_window)
 	gtk_widget_show (image_photo);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), image_photo, TRUE, TRUE, 0);
 
-	label_note = gtk_label_new (_("<b>XGCom (0.03 beta)</b>"));
+	label_note = gtk_label_new (_("<b>XGCom (0.04 beta)</b>"));
 	gtk_widget_show (label_note);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), label_note, FALSE, FALSE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (label_note), TRUE);
 
-	label_author = gtk_label_new (_("XGCom is a open source software.\n"
-					"Licensed under the GNU GPL v2\n"
-					"Copyright  @ Helight.xu@gmail.com"));
+	label_author = gtk_label_new (_("XGCom is a open source software.\nLicensed under the GNU GPL v2\nCopyright     Helight.xu@gmail.com"));
 	gtk_widget_show (label_author);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), label_author, FALSE, FALSE, 0);
 

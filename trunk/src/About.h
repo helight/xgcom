@@ -21,8 +21,6 @@
 GtkWidget *create_about_xnote (GtkWidget *mainwindow);
 GtkWidget* create_ascii_table (void);
 
-void create_xgcom_msg(GtkWidget *mainwindow, gchar * help_msg);
-
 void
 on_close_about_clicked (GtkButton *button, gpointer user_data);
 

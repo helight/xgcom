@@ -293,10 +293,16 @@ void get_data_from_window(struct xcomdata *xcomdata)
 void
 on_save_button_clicked (GtkButton *button, gpointer user_data)
 {	
+	struct stat con_stat;
 	char path[256] = {0};
+	
 	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
-	sprintf(path, "%s/.xgcom/xgcom.conf", getenv("HOME"));
-	printf("path: %s \n", path);
+	sprintf(path, "%s/.xgcom", getenv("HOME"));
+	debug_p("path: %s \n", path);
+	if(stat(path, &con_stat) != 0)
+		mkdir(path, 0755);
+	sprintf(path, "%s/.xgcom/.xgcom.conf", getenv("HOME"));
+	debug_p("path: %s \n", path);
 	get_data_from_window(xcomdata);
 	do_save_cfg_file(&(xcomdata->comcfg), path);
 	show_uart_param(xcomdata);

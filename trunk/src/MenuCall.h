@@ -17,8 +17,15 @@
 #define MenuCall_H_
 #include <gtk/gtk.h>
 #include "support.h"
+
+void
+on_send_uboot_activate(GtkMenuItem *menuitem, gpointer user_data);
+
 void
 on_local_echo_activate(GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_send_break_activate(GtkMenuItem *menuitem, gpointer user_data);
 
 void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data);
@@ -28,6 +35,9 @@ on_config_activate (GtkMenuItem *menuitem, gpointer user_data);
 
 void
 on_ascii_talbe_activate (GtkMenuItem *menuitem, gpointer user_data);
+
+void
+on_tools_item_activate (GtkMenuItem *menuitem, gpointer user_data);
 
 void
 on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data);
