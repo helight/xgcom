@@ -232,16 +232,15 @@ int write_uart(char *buf, int len)
 //void *read_uart(void *data)
 int read_uart(void)
 {	
-	int ret = 0, len = 0;
+	int len = 0;
 	unsigned char frame[1024] = {0};	
 	char num[32] = {0};
 
-	ret = read(ufd, frame, 1024);
-	if (ret < 0) {
+	len = read(ufd, frame, 1024);
+	if (len < 0) {
 		perror("read error:\n");
 		return -1;
-	}	
-	len = strlen(frame);
+	}
 	debug_p("read_uart frame:%s len: %d\n", frame, len);
 	if (uart_stat == 0) return -1;
 	if (is_hex_show)
