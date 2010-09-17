@@ -31,7 +31,7 @@ on_send_uboot_activate(GtkMenuItem *menuitem, gpointer user_data)
 void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data)
 {
-	debug_p("bey world;\n");
+	debug_p("bye world;\n");
 	close_uart();
 	gtk_main_quit();
 }
