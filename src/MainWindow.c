@@ -103,7 +103,7 @@ GtkWidget* create_Xgcom (struct xcomdata *xcomdata)
 gboolean
 on_Xgcom_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
-	printf("bey world;\n");
+	debug_p("bye world;\n");
 	close_uart();
 	gtk_main_quit();
 	
