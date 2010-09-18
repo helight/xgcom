@@ -23,6 +23,12 @@ dnl Add the languages which your application supports here.
 ALL_LINGUAS=""
 AM_GLIB_GNU_GETTEXT
 
+#debug options support
+AC_ARG_ENABLE([debug],
+    [AS_HELP_STRING([--enable-debug],[debug program(default is no)])],
+    [CFLAGS="-DDEBUG -g"],
+    [CFLAGS="-O2"])
+
 AC_OUTPUT([
 Makefile
 src/Makefile
