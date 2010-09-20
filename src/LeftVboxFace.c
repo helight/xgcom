@@ -328,7 +328,7 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_widget_show (vbox_frame_save);
 	gtk_container_add (GTK_CONTAINER (alignment3), vbox_frame_save);
 
-	save_data = gtk_button_new_with_mnemonic (_("Log Date"));
+	save_data = gtk_button_new_with_mnemonic (_("Log Data"));
 	gtk_widget_show (save_data);
 	gtk_box_pack_start (GTK_BOX (vbox_frame_save), save_data, FALSE, FALSE, 0);
 	gtk_widget_set_size_request (save_data, 50, -1);
@@ -339,13 +339,13 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_radio_button_set_group (GTK_RADIO_BUTTON (add_save), add_save_group);
 	add_save_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (add_save));
 
-	cover_save = gtk_radio_button_new_with_mnemonic (NULL, _("Cover"));
+	cover_save = gtk_radio_button_new_with_mnemonic (NULL, _("Rewrite"));
 	gtk_widget_show (cover_save);
 	gtk_box_pack_start (GTK_BOX (vbox_frame_save), cover_save, FALSE, FALSE, 0);
 	gtk_radio_button_set_group (GTK_RADIO_BUTTON (cover_save), add_save_group);
 	add_save_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (cover_save));
 
-	save_label = gtk_label_new (_("Log Date"));
+	save_label = gtk_label_new (_("Log Data"));
 	gtk_widget_show (save_label);
 	gtk_frame_set_label_widget (GTK_FRAME (frame_save), save_label);
 	gtk_label_set_use_markup (GTK_LABEL (save_label), TRUE);
