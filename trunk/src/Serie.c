@@ -248,7 +248,7 @@ int read_uart(void)
 	else
 		put_text(frame, len);		
 	if (is_save_vte_data) {
-		fprintf(save_data_fd, "%s", frame);
+		fwrite(frame, len, 1, save_data_fd);
 	}
 	memset(frame,'\0',len);
 	data_sum += len;
@@ -426,7 +426,7 @@ int save_fopen(char *file, int w)
 	if (w)
 		save_data_fd = fopen(file, "w");
 	else
-		save_data_fd = fopen(file, "r");
+		save_data_fd = fopen(file, "a+");
 	if (save_data_fd == NULL)
 		return -1;
 	return 0;
