@@ -136,9 +136,6 @@ on_save_data_clicked (GtkButton *button, gpointer user_data)
 		do_log(0);
 		save_fclose();
 	} else {
-		xcomdata->save_vte = 1;
-		gtk_button_set_label(GTK_BUTTON (xcomdata->button_save_vte), "Stop Log");
-		
 		debug_p("path:%s\n", xcomdata->save_file);
 		if(save_format)
 			ret = save_fopen(xcomdata->save_file, 1);
@@ -146,7 +143,11 @@ on_save_data_clicked (GtkButton *button, gpointer user_data)
 			ret = save_fopen(xcomdata->save_file, 0);
 		if (ret)
 			create_xgcom_msg(xcomdata->gmain, "<b>Cann't Open the file!!!</b>");
-		do_log(1);
+		else {
+			xcomdata->save_vte = 1;
+			gtk_button_set_label(GTK_BUTTON (xcomdata->button_save_vte), "Stop Log");
+			do_log(1);
+		}
 	}
 }
 
