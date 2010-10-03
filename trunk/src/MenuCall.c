@@ -120,7 +120,7 @@ on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data)
 		"10.面板托盘显示(可以隐藏或显示)\n"
 		"11.终端控制功能(像minicom那样可以直接在终端输入进行响应)\n"
 		"12.可配置默认启动参数.配置后以后启动则以默认启动参数打开串口\n"
-		"13.Ctrl + d 快捷键发送数据"
+		"13.Ctrl + d 快捷键发送数据\n"
 		"14.本地回显.\n");
 
 	create_xgcom_msg ((GtkWidget *)user_data, help_msg);
