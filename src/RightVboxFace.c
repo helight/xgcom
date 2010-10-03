@@ -30,6 +30,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 			GtkAccelGroup *accel_group, gpointer data)
 {
 	GtkWidget *right_vbox;
+	GtkWidget *right_vpaned;
 	GtkWidget *rcv_frame;
 	GtkWidget *alignment2;
 	GtkWidget *scrolledwindow2;
@@ -47,9 +48,14 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_box_pack_start (GTK_BOX (body_hbox), right_vbox, TRUE, TRUE, 0);
 	gtk_widget_set_size_request (right_vbox, 500, -1);
 
+	right_vpaned = gtk_vpaned_new ();
+	gtk_widget_show (right_vpaned);
+	gtk_container_add (GTK_CONTAINER (right_vbox), right_vpaned);
+  
 	rcv_frame = gtk_frame_new (NULL);
 	gtk_widget_show (rcv_frame);
-	gtk_box_pack_start (GTK_BOX (right_vbox), rcv_frame, TRUE, TRUE, 0);
+	//gtk_box_pack_start (GTK_BOX (right_vbox), rcv_frame, TRUE, TRUE, 0);
+	gtk_paned_pack1 (GTK_PANED (right_vpaned), rcv_frame, FALSE, TRUE);
 	gtk_widget_set_size_request (rcv_frame, -1, 380);
 
 	alignment2 = gtk_alignment_new (0.5, 0.5, 1, 1);
@@ -75,7 +81,8 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 
 	send_frame = gtk_frame_new (NULL);
 	gtk_widget_show (send_frame);
-	gtk_box_pack_start (GTK_BOX (right_vbox), send_frame, TRUE, TRUE, 0);
+	//gtk_box_pack_start (GTK_BOX (right_vbox), send_frame, TRUE, TRUE, 0);
+	gtk_paned_pack2 (GTK_PANED (right_vpaned), send_frame, FALSE, TRUE);
 
 	alignment1 = gtk_alignment_new (0.5, 0.5, 1, 1);
 	gtk_widget_show (alignment1);

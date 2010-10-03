@@ -97,11 +97,11 @@ create_leftvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	left_top = gtk_fixed_new();
 	gtk_widget_show(left_top);
 	left_vbox = gtk_vbox_new (FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(left_vbox), left_top, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(left_vbox), left_top, FALSE, TRUE, 0);
 	//gtk_widget_set_size_request (table_conf, 120, 30);
 	
 	gtk_widget_show (left_vbox);
-	gtk_box_pack_start (GTK_BOX (body_hbox), left_vbox, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (body_hbox), left_vbox, FALSE, TRUE	, 0);
 	gtk_widget_set_size_request (left_vbox, 120, -1);
 
 	left_top_vbox = gtk_vbox_new (FALSE, 0);
