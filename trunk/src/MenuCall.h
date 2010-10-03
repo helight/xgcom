@@ -21,6 +21,9 @@
 void
 on_send_uboot_activate(GtkMenuItem *menuitem, gpointer user_data);
 
+void 
+on_send_data_activate(GtkMenuItem *menuitem, gpointer user_data);
+
 void
 on_local_echo_activate(GtkMenuItem *menuitem, gpointer user_data);
 
