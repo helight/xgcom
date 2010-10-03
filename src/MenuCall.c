@@ -27,6 +27,21 @@ on_send_uboot_activate(GtkMenuItem *menuitem, gpointer user_data)
 	send_uboot(xcomdata);
 	debug_p("send_uboot\n");
 }
+void 
+on_send_data_activate(GtkMenuItem *menuitem, gpointer user_data)
+{
+	static time_t send_time = 0, tmp = 0;
+	struct xcomdata *xcomdata = (struct xcomdata *)user_data;
+		
+	if(send_time == 0)
+		time(&send_time);
+	time(&tmp);	
+	if ((tmp - send_time) > 1){
+		printf("send_data by ctrl + d\n");
+		send_data(xcomdata);
+		send_time = tmp;
+	}	
+}
 
 void
 on_quit_file_activate (GtkMenuItem	*menuitem, gpointer user_data)
@@ -105,7 +120,8 @@ on_help_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data)
 		"10.面板托盘显示(可以隐藏或显示)\n"
 		"11.终端控制功能(像minicom那样可以直接在终端输入进行响应)\n"
 		"12.可配置默认启动参数.配置后以后启动则以默认启动参数打开串口\n"
-		"13.本地回显.");
+		"13.Ctrl + d 快捷键发送数据"
+		"14.本地回显.\n");
 
 	create_xgcom_msg ((GtkWidget *)user_data, help_msg);
 }
