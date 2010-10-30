@@ -315,7 +315,7 @@ unsigned char change(char *str)
 	return result;
 }
 
-void hex_send(char *text)
+int hex_send(char *text)
 {
 	int ret = 0; 
 	unsigned char ch;
@@ -329,10 +329,11 @@ void hex_send(char *text)
 		}
 		if (strlen(ptr) > 2) ptr[2] = '\0';
 		ch = change(ptr);	
-		write_uart(&ch, 1);
+		ret = write_uart(&ch, 1);
 		debug_p("%s:%02x\n", ptr, ch);
 		ptr = temp;
 	}
+	return ret;
 }
 static inline int Send_crlf(void)
 {
