@@ -91,7 +91,7 @@ GtkWidget* create_configuration_dialog (struct xcomdata *xcomdata)
 	gtk_window_set_title (GTK_WINDOW (cfg_dialog), _("configuration"));
 	gtk_window_set_position (GTK_WINDOW (cfg_dialog), GTK_WIN_POS_CENTER_ON_PARENT);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (cfg_dialog), TRUE);
-	cfg_dialog_icon_pixbuf = create_pixbuf ("zhwen.png");
+	cfg_dialog_icon_pixbuf = create_pixbuf ("xgcom.png");
 	if (cfg_dialog_icon_pixbuf) {
 		gtk_window_set_icon (GTK_WINDOW (cfg_dialog), cfg_dialog_icon_pixbuf);
 		gdk_pixbuf_unref (cfg_dialog_icon_pixbuf);

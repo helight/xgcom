@@ -60,7 +60,7 @@ GtkWidget* create_Xgcom (struct xcomdata *xcomdata)
 	//gtk_window_set_default_size (GTK_WINDOW (main_window), 600, 700);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (main_window), TRUE);
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
-	Xgcom_icon_pixbuf = create_pixbuf ("zhwen.png");
+	Xgcom_icon_pixbuf = create_pixbuf ("xgcom.png");
 	if (Xgcom_icon_pixbuf){
 		gtk_window_set_icon (GTK_WINDOW (main_window), Xgcom_icon_pixbuf);
 		gdk_pixbuf_unref (Xgcom_icon_pixbuf);
