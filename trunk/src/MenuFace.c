@@ -80,7 +80,7 @@ GtkWidget* create_menu (GtkWidget *main_windown, GtkWidget *main_vbox,
 	gtk_widget_show (send_data);
 	gtk_container_add (GTK_CONTAINER (menu_file), send_data);
 	gtk_widget_add_accelerator (send_data, "activate", accel_group,
-		GDK_D, (GdkModifierType) GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+		GDK_Return, (GdkModifierType) GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
                             
 	quit_file = gtk_image_menu_item_new_from_stock ("gtk-quit", accel_group);
 	gtk_widget_show (quit_file);

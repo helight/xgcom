@@ -212,16 +212,26 @@ void *send_data(struct xcomdata *xcomdata)
 	GtkTextBuffer *buff = NULL;
 	gchar *text = NULL;
 	
+	if (!xcomdata->com_stat) {
+		create_xgcom_msg(xcomdata->gmain, "<b>Uart doesn't open!!!</b>");
+		return;
+	}
 	buff = gtk_text_view_get_buffer((GtkTextView *)xcomdata->gsend_text);
 	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER(buff), &start, &end);
 	text = gtk_text_buffer_get_text(GTK_TEXT_BUFFER(buff), &start, &end, FALSE);
 	len = strlen(text);
-	if (len)
-		if(is_hex_send == 0)
+	if (len) {
+		if (is_hex_send == 0) {
 			ret = write_uart(text, len);
-		else {
-			hex_send(text);
+		} else {
+			ret = hex_send(text);
 		}
+		if (ret < 0)
+			create_xgcom_msg(xcomdata->gmain,
+							"<b>write:: Input/output error</b>");
+	} else {
+		create_xgcom_msg(xcomdata->gmain, "<b>No words to be send!!!</b>");
+	}
 	debug_p("data: %s len:%d \n", text, len);
 }
 

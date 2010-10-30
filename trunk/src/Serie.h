@@ -25,7 +25,7 @@ void check_port(struct xcomdata *xcomdata);
 int open_uart(struct xcomdata *xcomdata);
 int write_uart(char *buf, int len);
 int read_uart(void);
-void hex_send(char * text);
+int hex_send(char * text);
 void save_vte_data_to_file(char *ch, char *path);
 int char_type(char ch);
 unsigned char change(char *str);
