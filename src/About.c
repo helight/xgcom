@@ -39,7 +39,7 @@ GtkWidget* create_about_xcomtool (GtkWidget *main_window)
 	GTK_WINDOW(main_window), GTK_DIALOG_DESTROY_WITH_PARENT,NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (about_xcomtool), GDK_WINDOW_TYPE_HINT_DIALOG);
 	
-	about_xcomtool_icon_pixbuf = create_pixbuf ("zhwen.png");
+	about_xcomtool_icon_pixbuf = create_pixbuf ("xgcom.png");
 	if (about_xcomtool_icon_pixbuf)
 	{
 		gtk_window_set_icon (GTK_WINDOW (about_xcomtool), about_xcomtool_icon_pixbuf);
@@ -53,7 +53,7 @@ GtkWidget* create_about_xcomtool (GtkWidget *main_window)
 	gtk_widget_show (vbox_xcomtool);
 	gtk_box_pack_start (GTK_BOX (dialog_vbox), vbox_xcomtool, TRUE, TRUE, 0);
 
-	image_photo = create_pixmap (about_xcomtool, "zhwen.png");
+	image_photo = create_pixmap (about_xcomtool, "xgcom.png");
 	gtk_widget_show (image_photo);
 	gtk_box_pack_start (GTK_BOX (vbox_xcomtool), image_photo, TRUE, TRUE, 0);
 
