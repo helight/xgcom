@@ -131,6 +131,6 @@ on_about_xgcom_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *window_about;
 
-	window_about = (GtkWidget *)create_about_xcomtool ((GtkWidget *)user_data);
+	window_about = (GtkWidget *)create_about_xgcom ((GtkWidget *)user_data);
 	gtk_widget_show (window_about);
 }

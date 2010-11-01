@@ -4,8 +4,6 @@ SUBDIRS = src po
 
 EXTRA_DIST = \
 	autogen.sh \
-	xcomtool.glade \
-	xcomtool.gladep
 
 install-data-local:
 	@$(NORMAL_INSTALL)
