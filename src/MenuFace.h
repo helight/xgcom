@@ -15,6 +15,7 @@
 #ifndef MenuFace_H_
 #define MenuFace_H_
 
+#include <stdlib.h>
 #include <gtk/gtk.h>
 #include "support.h"
 
