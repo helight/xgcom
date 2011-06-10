@@ -46,7 +46,7 @@ so arch users can install this program with this command :yaourt -S xgcom
 
 5.count the num of receive and send data (by byte)
 
-6.log the receive data into file (append or cover)
+6.log the receive data into file (append or cover)  path = getenv("HOME")/uart_data.txt
 
 7.send file (choose and send file)
 
