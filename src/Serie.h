@@ -29,6 +29,7 @@ int hex_send(char * text);
 void save_vte_data_to_file(char *ch, char *path);
 int char_type(char ch);
 unsigned char change(char *str);
+char *getlast(char *str);
 
 void clean_count();
 int save_fopen(char *file, int w);
@@ -36,6 +37,7 @@ void save_fclose(void);
 void do_log(int log);
 void is_hex_show_data(void);
 void send_uboot(struct xcomdata *xcomdata);
+
 #endif //Serie_H_
 
 

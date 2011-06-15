@@ -558,3 +558,14 @@ void send_uboot(struct xcomdata *xcomdata)
 	debug_p(last_words);
 	create_xgcom_msg(xcomdata->gmain, last_words);
 }
+
+char *getlast(char *str)
+{
+	char *p, *tmp;
+	p = str;
+	while(strchr(p, '/')){
+			tmp = strchr(p, '/');
+			p = tmp + 1;
+	};
+	return p;
+}

@@ -109,7 +109,7 @@ void init_xcomdata(struct xcomdata *xcomdata)
 	memset(xcomdata->cfg_file, '\0', sizeof(xcomdata->cfg_file));
 	memset(xcomdata->send_file, '\0', sizeof(xcomdata->send_file));
 	memset(xcomdata->save_file, '\0', sizeof(xcomdata->save_file));
-	sprintf(xcomdata->save_file, "%s/uart_data.txt", getenv("HOME"));
+	sprintf(xcomdata->save_file, "%s/data", getenv("HOME"));
 	
 	xcomdata->gmain = NULL;
 	xcomdata->grcv_text = NULL;

@@ -65,9 +65,9 @@ enum flow {
 struct comcfg{
 	int 			baud;			//Baud rate
 	int 			databit;		//Data bits
-	int			stopbit;		//Stop bits
+	int				stopbit;		//Stop bits
 	char 			port[16];		//The port
-	enum parity 		parity;		//Parity
+	enum parity 	parity;			//Parity
 	enum flow		flow;			//Flow control
 };
 /*
@@ -77,20 +77,20 @@ struct xcomdata{
 	int fd;
 	int local_echo;			//local echo
 	int ishex_send;			//send by hex(1) or not(0)
-	int com_stat;				//the stat of the com
-	int rcv_num;				//how many byte has received
-	int send_num;				//how many byte has send
-	int save_vte;				//save the receive data
-	int save_format;			//how to save data: add(1) or cover(0)
+	int com_stat;			//the stat of the com
+	int rcv_num;			//how many byte has received
+	int send_num;			//how many byte has send
+	int save_vte;			//save the receive data
+	int save_format;		//how to save data: add(1) or cover(0)
 	int keep_send;			//keep sending(1) or not(0)
-	int interval;				//interval of sending
-	int choose_file;			//load conf file (0) load send fiel (1)
-						//save conf data (2) save vte file (3)
+	int interval;			//interval of sending
+	int choose_file;		//load conf file (0) load send fiel (1)
+							//save conf data (2) save vte file (3)
 	struct comcfg comcfg;
-	gchar		cfg_file[256];		//the path of cfg file save or load
+	gchar		cfg_file[256];	//the path of cfg file save or load
 	gchar		send_file[256];	//the path of file you want to send
 	gchar		save_file[356];	//the path of file you want to save 
-						//the date form com
+								//the date form com
 	GtkWidget *gmain;
 	GtkWidget *grcv_text;
 	GtkWidget *gsend_text;

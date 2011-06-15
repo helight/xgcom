@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -137,14 +138,24 @@ on_save_data_clicked (GtkButton *button, gpointer user_data)
 		save_fclose();
 	} else {
 		debug_p("path:%s\n", xcomdata->save_file);
+		unsigned char logpath[1024] = {0};
+		time_t timep;
+        struct tm *p;
+        time(&timep);
+        p=localtime(&timep);
+
+		snprintf(logpath, sizeof(logpath), "log to:%s_%s_%d%d%d%d", xcomdata->save_file, 
+			getlast(xcomdata->comcfg.port), (1+p->tm_mon), p->tm_mday,p->tm_hour, p->tm_min);
+		debug_p("%s\n", logpath + 7);
 		if(save_format)
-			ret = save_fopen(xcomdata->save_file, 1);
+			ret = save_fopen(logpath + 7, 1);
 		else
-			ret = save_fopen(xcomdata->save_file, 0);
+			ret = save_fopen(logpath + 7, 0);
 		if (ret)
 			create_xgcom_msg(xcomdata->gmain, "<b>Cann't Open the file!!!</b>");
 		else {
 			xcomdata->save_vte = 1;
+			create_xgcom_msg(xcomdata->gmain, logpath);
 			gtk_button_set_label(GTK_BUTTON (xcomdata->button_save_vte), "Stop Log");
 			do_log(1);
 		}
