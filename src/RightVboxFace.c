@@ -16,6 +16,8 @@
 #include <vte/vte.h>
 #include "RightVboxFace.h"
 
+#define MAX_VTE_SCROLL_LINE	9999
+
 static gboolean show_index = FALSE;
 static int bytes_per_line = 80;
 static int total_bytes = 0;
@@ -69,6 +71,7 @@ GtkWidget* create_rightvbox (GtkWidget *main_window, GtkWidget *body_hbox,
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow2), GTK_SHADOW_IN);
 
 	rcv_text = vte_terminal_new();
+	vte_terminal_set_scrollback_lines(VTE_TERMINAL(rcv_text), MAX_VTE_SCROLL_LINE);
 	vte_terminal_set_backspace_binding(VTE_TERMINAL(rcv_text),
 				     VTE_ERASE_ASCII_BACKSPACE);
 	gtk_widget_show (rcv_text);
@@ -192,3 +195,4 @@ void clean_local_echo()
 	local_echo_on = 0;	
 	debug_p("local echo: %d \n", local_echo_on);
 }
+
