@@ -16,7 +16,7 @@
 #include <vte/vte.h>
 #include "RightVboxFace.h"
 
-#define MAX_VTE_SCROLL_LINE	9999
+#define MAX_VTE_SCROLL_LINE 8192	
 
 static gboolean show_index = FALSE;
 static int bytes_per_line = 80;
