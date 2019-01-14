@@ -66,7 +66,7 @@ GtkWidget* create_about_xgcom (GtkWidget *main_window)
 	gtk_widget_show (label_author);
 	gtk_box_pack_start (GTK_BOX (vbox_xgcom), label_author, FALSE, FALSE, 0);
 
-	button_close = gtk_button_new_with_mnemonic (_("http://zhwen.org"));
+	button_close = gtk_button_new_with_mnemonic (_("http://helight.info"));
 	gtk_widget_show (button_close);
 	gtk_box_pack_start (GTK_BOX (vbox_xgcom), button_close, FALSE, FALSE, 0);
 	gtk_button_set_relief (GTK_BUTTON (button_close), GTK_RELIEF_NONE);
@@ -101,7 +101,7 @@ void
 on_button_link_clicked (GtkButton *button, gpointer user_data)
 {
 	gchar tmp[80];
-	g_snprintf(tmp, 80, "firefox http://zhwen.org & >/dev/null");
+	g_snprintf(tmp, 80, "firefox http://helight.info & >/dev/null");
 	system(tmp);
 }
 
