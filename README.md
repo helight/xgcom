@@ -49,4 +49,3 @@ part code is form gtkterm-0.99.5.
 # About：
 
 If you find any bugs, please email us, we will fix it as soon as possible!
-http://zhwen.org/proj/XGCom.png' />
