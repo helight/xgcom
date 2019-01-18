@@ -6,7 +6,7 @@ A gui tools to help guys develop series port, like minicom
 A gui tools to help guys debug programs remotely by series port, like minicom.
 part code is form gtkterm-0.99.5. 
 ![](doc/1.png)
-![](doc/2.png)
+![](doc/xgcom.png)
 
 # Features：
 	1.send and receive data from com
