@@ -264,10 +264,11 @@ on_hex_send_toggled (GtkToggleButton *togglebutton, gpointer user_data)
 		is_hex_send = 0;
 }
 
-void *keep_send(struct xcomdata *xcomdata)
+gboolean keep_send(struct xcomdata *xcomdata)
 {	
 	send_data(xcomdata);
 	debug_p("keep send\n");	
+	return G_SOURCE_CONTINUE; 
 }
 
 void
